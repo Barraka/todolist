@@ -16,11 +16,12 @@
     --dark:rgb(75, 75, 75);
     --light:rgb(194, 194, 194);
     --background:rgb(194, 194, 194);
-    --modalbg:rgb(95, 56, 56);
+    --modalbg:#2F4858;
+
 }
 @media only screen and (max-width: 600px) {
     :root {
-        --idealdimension: calc(min(100vw,100vh) * 0.8);
+        --idealdimension: calc(min(100vw,100vh));
     }
 }
 @media only screen and (min-width: 601px) {
@@ -37,6 +38,7 @@ body {
     width: var(--idealdimension);
     margin: 0 auto;
     min-height: 100vh;
+    overflow: hidden;
 }
 
 /*------ Header ---------- */
@@ -111,5 +113,6 @@ body {
 /* ---------- Main content ---------- */
 .maincontent {
     position:relative;
-    background-color: var(--mainbg);
+    background-color: var(--titlebg);
+    height:100vh;
 }

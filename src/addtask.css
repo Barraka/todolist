@@ -3,24 +3,33 @@
     top:0;
     left:0;
     right:0;    
-    height: 500px;
+    /* height: 500px; */
+    transition: all 0.3s ease-in-out;
+    max-width: var(--idealdimension);
+    z-index: 1;
 }
 .taskcontainerhidden {
-    display:none;
-    transform: scale(0);
+    /* display:none; */
+    transform: scale(0) translateY(-100%);
 }
 .taskcontainervisible {
-    display:flex;
+    /* display:flex; */
+    max-width: var(--idealdimension);
 }
 .taskcontainerinner {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    background-color: var(--modalbg);
+    /* background-color: var(--modalbg); */
+    /* background-color: var(--titlebg); */
     text-align: center;
-    min-width: var(--idealdimension);
+    max-width: var(--idealdimension);
     color:var(--light);
+    height:fit-content;
+    padding-bottom: 1rem;
+    height:100vh;
+    position:relative;
 }
 .addoptions {
     display: flex;
@@ -44,14 +53,141 @@
 }
 .modalbody {
     display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 10px;
+    margin: 1rem;
+    border: 2px solid var(--light);
+    border-radius: 10px;
+    position:relative;
+    box-shadow: 0 5px 16px 4px rgb(78, 1, 1);
+    max-width: var(--idealdimension);
+    background-color: var(--modalbg);
+    min-height: 50%;
+}
+.cancel {
+    position:absolute;
+    top:0;
+    right:0;
+    stroke:rgb(168, 124, 124);
+    fill:rgb(168, 124, 124);
+    margin:5px;
+    cursor: pointer;
+}
+.cancel:hover {
+    stroke:red;
+    fill:red;
+}
+
+
+/* -------- form elements -------- */
+input, textarea {
+    text-align: center;
+    /* width:90%; */
+    border-radius: 10px;
+    resize: none;
+    border:none;
+    background-color: transparent;
+    cursor: pointer;
+    color:var(--light);
+}
+input {
+    font-size: 1.5em;
+}
+textarea {
+    font-size: 1em;
+}
+input:focus, textarea:focus {
+    outline:none;
+    border:none;
+}
+label, input, textarea, .formouter {
+    /* width: 50ch; */
+    width:90%;
+}
+.formouter {    
+    display: inherit;
+    background-color: var(--modalbg);    
+    padding:0.5rem;
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    
+    gap: 10px;
 }
-.formouter {
-    border: 1px solid var(--light);
-    display: inherit;
-    background-color: var(--modalbg);
-    border-radius: 10px;
+
+.priorityinput {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height:50px;
+    gap:15px;
+    cursor: pointer;
+}
+.priohint {
+    height:1.5rem;
+    font-size: 1rem;
+}
+.prioitem {
+    border-radius: 50%;
+    width:2rem;
+    height: 2rem;
+    transition: transform 0.2s ease-in;
+}
+.prioitem:hover {
+    border:2px solid cyan;
+    transform: scale(1.5);
+}
+.prio1 {
+    background-color: rgb(72, 75, 252);
+    transition: all 0.2s ease-in;
+}
+.prio2 {
+    background-color: rgb(243, 109, 46);
+    transition: all 0.2s ease-in;
+}
+.prio3 {
+    background-color: red;
+    transition: all 0.2s ease-in;
+}
+.prioselect {
+    transform: scale(1.2);
+    border:2px solid cyan;
+}
+.submit {
+    width:fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* width:80px; */
+    cursor: pointer;
+}
+
+.submit svg{
+    stroke:var(--light);
+    fill:var(--light);    
+    /* transform: scale(1.5); */
+}
+.submit:hover path{
+    fill: green;
+    stroke: green;
+}
+input[type='date'] {
+    width:auto;
+    border: 2px solid var(--light);
+    font-size: 1em;
+}
+
+/* -------- Add project -------- */
+.projectlabel, .listlabel {
+    margin: 20px;
+}
+.projectinput, .listinput {
+    flex:1;
+}
+.projecthint, .listhint {
+    margin: 20px;
 }

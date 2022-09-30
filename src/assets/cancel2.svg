@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1080" height="1080" viewBox="0 0 1080 1080" xml:space="preserve">
+<desc>Created with Fabric.js 4.2.0</desc>
+<defs>
+</defs>
+<rect x="0" y="0" width="100%" height="100%" fill="transparent"></rect>
+<g transform="matrix(1 0 0 1 540 540)" id="2dc1f15d-c586-4dc2-9865-4e99e09de7c3"  >
+<rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1; visibility: hidden;" vector-effect="non-scaling-stroke"  x="-540" y="-540" rx="0" ry="0" width="1080" height="1080" />
+</g>
+<g transform="matrix(1 0 0 1 540 540)" id="48e98daf-d0c6-4de9-9b48-dd22268a2a5c"  >
+</g>
+<g transform="matrix(14.77 0 0 14.77 540 513.04)" id="43dacd18-b2a4-4090-91c8-8f94f0e94e86"  >
+<path style="stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  transform=" translate(-24, -24)" d="M 16.5 33.6 L 24 26.1 L 31.5 33.6 L 33.6 31.5 L 26.1 24 L 33.6 16.5 L 31.5 14.4 L 24 21.9 L 16.5 14.399999999999999 L 14.4 16.5 L 21.9 24 L 14.399999999999999 31.5 Z M 24 44 Q 19.9 44 16.25 42.425 Q 12.6 40.849999999999994 9.875 38.125 Q 7.15 35.4 5.575 31.75 Q 4 28.1 4 24 Q 4 19.85 5.575 16.2 Q 7.15 12.549999999999999 9.875 9.85 Q 12.6 7.1499999999999995 16.25 5.574999999999999 Q 19.9 4 24 4 Q 28.15 4 31.8 5.575 Q 35.45 7.15 38.15 9.850000000000001 Q 40.85 12.55 42.425 16.200000000000003 Q 44 19.85 44 24 Q 44 28.1 42.425 31.75 Q 40.849999999999994 35.4 38.15 38.125 Q 35.45 40.85 31.799999999999997 42.425 Q 28.15 44 24 44 Z M 24 41 Q 31.1 41 36.05 36.025 Q 41 31.05 41 24 Q 41 16.9 36.05 11.95 Q 31.1 7 24 7 Q 16.95 7 11.975 11.95 Q 7 16.9 7 24 Q 7 31.05 11.975 36.025 Q 16.95 41 24 41 Z M 24 24 Z" stroke-linecap="round" />
+</g>
+</svg>
