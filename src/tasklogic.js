@@ -61,8 +61,8 @@ let addtask = document.querySelector('.adddiv');
 addtask.addEventListener('click', showmodal);
 
 function showmodal() {
-    addmenu();
-    newtask();
+    addmenu.createmenu();
+    newtaskmodule.displaytask();
     let modal = document.querySelector('.taskcontainer');
     modal.classList.remove('taskcontainerhidden');
     modal.classList.add('taskcontainervisible');
@@ -72,13 +72,9 @@ function hidemodal() {
     let modal = document.querySelector('.taskcontainer');
     modal.classList.remove('taskcontainervisible');
     modal.classList.add('taskcontainerhidden');
+    addmenu.removeMenuStyles();
+}
+function addTask(t) {
+    mytasks.newTask(t.title, t.description,t.deadline,t.priority,t.project);
 }
 
-function erasefields() {
-    let inputs = document.querySelectorAll('input');
-    for(ele of inputs)ele.value="";
-    // titleinput.value="";
-    // descriptioninput.value="";
-    // deadlineinput.value="";
-    hidemodal();
-}

@@ -1,5 +1,6 @@
 //----Add list layout
-function newlist() {
+function newlistmodule() {
+    let modalbody=document.querySelector('.modalbody');
     modalbody.innerHTML="";
     let cancel = document.createElement('div');
     cancel.classList.add('cancel');
@@ -30,4 +31,9 @@ function newlist() {
     modalbody.appendChild(listhint);
     modalbody.appendChild(submitlist);
     cancel.addEventListener('click',erasefields);
+    function erasefields() {
+        let inputs = modalbody.querySelectorAll('input');
+        for(ele of inputs)ele.value="";
+        hidemodal();
+    }
 }

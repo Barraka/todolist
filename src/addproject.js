@@ -1,6 +1,7 @@
 
 //----Add project layout
-function newproject() {
+function newprojectmodule() {
+    let modalbody=document.querySelector('.modalbody');
     modalbody.innerHTML="";
     let cancel = document.createElement('div');
     cancel.classList.add('cancel');
@@ -9,11 +10,12 @@ function newproject() {
 
     let projectlabel = document.createElement('label');
     projectlabel.classList.add('projectlabel');
-    let projectinput = document.createElement('input');
+    let projectinput = document.createElement('textarea');
     projectinput.classList.add('projectinput');
     projectinput.placeholder="Your Exciting new Project";
-    titleinput.required=true;
-    titleinput.type="text";
+    projectinput.rows=2;
+    projectinput.required=true;
+    projectinput.type="text";
     projectlabel.textContent="What do you want to plan?"
     
     let projecthint = document.createElement('div');
@@ -31,4 +33,10 @@ function newproject() {
     modalbody.appendChild(projecthint);
     modalbody.appendChild(submittask);
     cancel.addEventListener('click',erasefields);
+
+    function erasefields() {
+        let inputs = modalbody.querySelectorAll('input');
+        for(ele of inputs)ele.value="";
+        hidemodal();
+    }
 }
