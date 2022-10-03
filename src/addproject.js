@@ -17,6 +17,7 @@ function newprojectmodule() {
     projectinput.required=true;
     projectinput.type="text";
     projectlabel.textContent="What do you want to plan?"
+    projectinput.setCustomValidity('Enter your new project');
     
     let projecthint = document.createElement('div');
     projecthint.classList.add('projecthint');
@@ -33,10 +34,20 @@ function newprojectmodule() {
     modalbody.appendChild(projecthint);
     modalbody.appendChild(submittask);
     cancel.addEventListener('click',erasefields);
+    submittask.addEventListener('click',appendtask);
+    projectinput.focus();
 
     function erasefields() {
         let inputs = modalbody.querySelectorAll('input');
         for(ele of inputs)ele.value="";
-        hidemodal();
+        addmenu.hidemodal();
+    }
+    function appendtask() {
+        if(projectinput.value==="") {
+            projectinput.reportValidity();
+        }
+        else {
+            //add project
+        }
     }
 }

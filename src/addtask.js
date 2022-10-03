@@ -27,6 +27,7 @@ let newtaskmodule=(()=> {
         titleinput.placeholder="Your Task";
         titleinput.required=true;
         titleinput.type="text";
+        titleinput.setCustomValidity('Enter the task you want to set');
         
         let descriptionouter = document.createElement('div');
         descriptionouter.classList.add('formouter');
@@ -78,7 +79,7 @@ let newtaskmodule=(()=> {
         deadlineinput.classList.add('forminput');
         deadlinelabel.textContent="Due:";
         deadlineinput.type="date";
-        deadlineinput.placeholder="Date";
+        // deadlineinput.placeholder="Date";
         
         let projectouter = document.createElement('div');
         projectouter.classList.add('formouter');
@@ -117,13 +118,14 @@ let newtaskmodule=(()=> {
         prio3.addEventListener('mouseover',priohintOver);
         prio3.addEventListener('mouseout',priohintOut);
         addmenu.setinitialStyle();
+        titleinput.focus();
     }
     
     function erasefields() {
         let modalbody=document.querySelector('.modalbody');
         let inputs = modalbody.querySelectorAll('input');
         for(ele of inputs)ele.value="";
-        hidemodal();
+        addmenu.hidemodal();
     }
     
     function appendtask() {
@@ -131,10 +133,16 @@ let newtaskmodule=(()=> {
         // let descriptioninput = document.querySelector('.descriptioninput');
         // let deadlineinput = document.querySelector('.deadlineinput');
         //let project = document.querySelector('.project');
-        let returntask= {title:titleinput.value,description:descriptioninput.value, deadline:deadlineinput.value, priority:priochosen,project:projectinput};
-        erasefields();
-        addTask(returntask);
-        // return returntask; 
+        if(titleinput.value==="") {
+            titleinput.reportValidity();
+        }
+        else {
+            let returntask= {title:titleinput.value,description:descriptioninput.value, dueDate:deadlineinput.value, priority:priochosen,project:projectinput};
+            erasefields();
+            // addTask(returntask);
+            tasklogic.mytasks.newTask(returntask);            
+            taskDom.showCategories();
+        }
     }
     function chooseprio(e) {
         if(priochosen===parseInt(e.target.getAttribute('data-prio'))) {

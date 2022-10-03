@@ -15,6 +15,7 @@ function newlistmodule() {
     listinput.required=true;
     listinput.type="text";
     listlabel.textContent="Lists are great"
+    listinput.setCustomValidity('Enter you new list');
     
     let listhint = document.createElement('div');
     listhint.classList.add('listhint');
@@ -31,9 +32,20 @@ function newlistmodule() {
     modalbody.appendChild(listhint);
     modalbody.appendChild(submitlist);
     cancel.addEventListener('click',erasefields);
+    submitlist.addEventListener('click',appendtask);
+    listinput.focus();
+
     function erasefields() {
         let inputs = modalbody.querySelectorAll('input');
         for(ele of inputs)ele.value="";
-        hidemodal();
+        addmenu.hidemodal();
+    }
+    function appendtask() {
+        if(listinput.value==="") {
+            listinput.reportValidity();
+        }
+        else {
+            //add project
+        }
     }
 }

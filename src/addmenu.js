@@ -55,7 +55,21 @@ let addmenu=(()=>{
         let newtask = document.querySelector('.newtask');
         newtask.classList.add('menuSelected');
     }
+    function showmodal() {
+        addmenu.createmenu();
+        newtaskmodule.displaytask();
+        let modal = document.querySelector('.taskcontainer');
+        modal.classList.remove('taskcontainerhidden');
+        modal.classList.add('taskcontainervisible');
+        
+    }
+    function hidemodal() {
+        let modal = document.querySelector('.taskcontainer');
+        modal.classList.remove('taskcontainervisible');
+        modal.classList.add('taskcontainerhidden');
+        addmenu.removeMenuStyles();
+    }
     
     
-    return {removeMenuStyles,manangeMenuStyles,createmenu, setinitialStyle};
+    return {removeMenuStyles,manangeMenuStyles,createmenu,setinitialStyle, showmodal,hidemodal};
 })();

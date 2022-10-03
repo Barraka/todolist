@@ -138,27 +138,27 @@ label, input, textarea, .formouter {
     border-radius: 50%;
     width:2rem;
     height: 2rem;
-    transition: transform 0.2s ease-in;
+    transition: transform 0.3s ease;
 }
 .prioitem:hover {
-    border:2px solid cyan;
+    /* border:2px solid cyan; */
     transform: scale(1.5);
 }
-.prio1 {
+.modalbody .prio1 {
     background-color: rgb(72, 75, 252);
     transition: all 0.2s ease-in;
 }
-.prio2 {
+.modalbody .prio2 {
     background-color: rgb(243, 109, 46);
     transition: all 0.2s ease-in;
 }
-.prio3 {
+.modalbody .prio3 {
     background-color: red;
     transition: all 0.2s ease-in;
 }
 .prioselect {
     transform: scale(1.2);
-    border:2px solid cyan;
+    border:3px solid cyan;
 }
 .submit {
     width:fit-content;
