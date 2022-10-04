@@ -27,13 +27,29 @@ li {
     :root {
         --idealdimension: min(100vw,100vh);
         --modalmody: calc(min(100vw,100vh) * 0.9); 
+        --fontsmall: 0.5em;
+        --fontmedium: 0.75em;
+        --fontlarge: 1.25em;
+        --svgscale:0.5;
+        --cardgap:2px;
+        --flexbasis:0.5;
     }
 }
 @media only screen and (min-width: 901px) {
     :root {
         --idealdimension:calc(100vw * 0.5);
-        /* --modalbody: calc(var(--idealdimension) * 0.6);  */
         --modalmody: calc(min(100vw,100vh) * 0.9); 
+        --fontsmall: 0.8em;
+        --fontmedium: 1.1em;
+        --fontlarge: 1.3em;
+        --svgscale:0.7;
+        --cardgap:1em;
+        --flexbasis:0.5;
+    }
+}
+@media only screen and (max-width: 400px) {
+    :root {
+        --flexbasis:0;
     }
 }
 body {
@@ -42,11 +58,8 @@ body {
 }
 
 .container {
-    /* width: var(--idealdimension); */
     margin: 0 auto;
     min-height: 100vh;
-    /* overflow: hidden; */
-    /* min-width: 900px; */
     max-width: 1000px;
 }
 .app {
@@ -61,6 +74,7 @@ body {
     color:var(--titletxt);
     font-size: 2em;
     padding: 0.5rem;
+    /* width:100%; */
 }
 .menuaccess, .adddiv, .cart {
     display: flex;
@@ -92,11 +106,12 @@ body {
 }   
 
 .header svg{
-    /* max-width: 1.8rem; */
     transform: scale(0.7);
+    stroke: var(--light);
+    fill: var(--light);
 }
 #shopping {
-    margin: 0 1rem;
+    margin: 0 1em;
 }
 
 /* ---------- Links ---------- */
@@ -129,6 +144,7 @@ body {
     height: fit-content;
     min-height: 50vh;
     overflow: hidden;
+    font-size: var(--fontmedium);
 }
 .task_category {
     display:flex;
@@ -137,6 +153,17 @@ body {
     align-items: flex-start;
     /* background-color: var(--modalbg); */
     padding-left: 2rem;
+    
+}
+.categorytxt {
+    color:var(--light);
+    margin:1rem 2rem;
+    border:2px solid var(--light);
+    border-radius:50px;
+    width:25%;
+    text-align: center;
+    font-size: var(--fontlarge);
+    background-color: var(--titledark);
 }
 .list_item {
     color:var(--dark);
@@ -152,16 +179,18 @@ body {
     background-color: rgb(149, 113, 187);
     box-shadow: 0 5px 16px 4px rgb(78, 1, 1);
     width:100%;
-    gap:1rem;
+    gap:var(--cardgap);
     text-align: center;
-    transition:all 0.4s ease;
+    transition:all 0.4s ease;    
 }
 .taskcard svg {
-    transform: scale(0.7);
+    transform: scale(var(--svgscale));
 }
 .tasktitle {
     flex:1;
-    font-size: 1.5rem;
+    font-size: var(--fontlarge);
+    min-width: 50px;
+    text-decoration: underline;
 }
 .tasktitle {
     text-align: left;
@@ -176,10 +205,10 @@ ul .prio0 {
     border:3px solid transparent;
 }
 ul .prio1 {
-    border:3px solid green;
+    border:3px solid rgb(72, 75, 252);
 }
 ul .prio2 {
-    border:3px solid orange;
+    border:3px solid rgb(243, 109, 46);
 }
 ul .prio3 {
     border:3px solid red;
@@ -195,4 +224,32 @@ ul .prio3 {
 .validate {
     /* transform:scale(0); */
     transform:translateX(120%);
+}
+.edit, .deadline, .project, .taskdescription {
+    flex-basis: var(--flexbasis);
+    overflow:hidden;
+}
+/* ------- Projects ------- */
+.categoryOuter {
+    border:1px solid var(--light);
+    border-radius: 100vw;
+    padding: 10px 0;
+}
+.projectAddOuter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.projectAddOuter svg {
+    transform: scale(var(--svgscale));
+    cursor: pointer;
+}
+.projectAddOuter svg:hover {
+    fill:cyan;
+    stroke:cyan;
+}
+.partOfaProject {
+    text-align: center;
+    list-style:square;
 }

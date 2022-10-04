@@ -1,5 +1,51 @@
 taskDom= (function() {
     let maincontent = document.querySelector('.maincontent');
+    function showProjects() {
+        maincontent.innerHTML='';
+        let theProjects=projects.getProject();
+        let numberOfProjects=theProjects.length;
+        for(let i=0;i<numberOfProjects;i++) {
+            let categoryOuter = document.createElement('div');
+            categoryOuter.classList.add('categoryOuter');
+            let projectAddOuter = document.createElement('div');
+            projectAddOuter.classList.add('projectAddOuter');
+            let projectTitle = document.createElement('div');
+            projectTitle.classList.add('projectTitle', 'categorytxt');
+            projectTitle.textContent=theProjects[i].name;
+            //add edit icon
+            let projectEditIcon = document.createElement('div');
+            projectEditIcon.classList.add('projectEditIcon');
+            projectEditIcon.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M9 39h2.2l22.15-22.15-2.2-2.2L9 36.8Zm30.7-24.3-6.4-6.4 2.1-2.1q.85-.85 2.1-.85t2.1.85l2.2 2.2q.85.85.85 2.1t-.85 2.1Zm-2.1 2.1L12.4 42H6v-6.4l25.2-25.2Zm-5.35-1.05-1.1-1.1 2.2 2.2Z"/></svg>';
+            //combine both to projectAddOuter
+            projectAddOuter.appendChild(projectTitle);
+            projectAddOuter.appendChild(projectEditIcon);
+            categoryOuter.appendChild(projectAddOuter);
+            let allTasks=tasklogic.mytasks.getallTasks;
+            let currentProjectId=theProjects[i].id;
+            // projectTitle.setAttribute('contenteditable','true');
+            for(let k=allTasks.length-1;k>=0;k--) {
+                if(allTasks[k].name===theProjects[i]) {
+                    console.log('create div for individual task');
+                    let partOfaProject = document.createElement('li');
+                    partOfaProject.classList.add('partOfaProject');
+                    partOfaProject.textContent=allTasks[k].title;
+                    categoryOuter.appendChild(partOfaProject);
+                }
+            }
+            projectEditIcon.addEventListener('click',editProjectName);
+            maincontent.appendChild(categoryOuter);
+        }
+    function editProjectName(e) {
+        let target=e.currentTarget.previousSibling;
+        target.setAttribute('contenteditable','true');
+        target.focus();
+        target.addEventListener('blur',stopEditProjectName);
+    }
+    function stopEditProjectName(e) {
+        e.currentTarget.setAttribute('contenteditable','false');
+    }   
+        
+    }
     function showCategories() {
         maincontent.innerHTML='';
         let allgroups=tasklogic.generateGroups();
@@ -11,7 +57,10 @@ taskDom= (function() {
         if(overdue.length>0) {
             let overdue_ul=document.createElement('ul');
             overdue_ul.classList.add('overdue_ul', 'task_category');
-            overdue_ul.textContent="Overdue";
+            let overduetxt = document.createElement('div');
+            overduetxt.classList.add('overduetxt', 'categorytxt');
+            overduetxt.textContent="Overdue";
+            maincontent.appendChild(overduetxt);
             overdue.forEach(x=>{
                 let overdue_li=document.createElement('li');
                 // overdue_li.classList.add('overdue_li', 'list_item');
@@ -25,7 +74,10 @@ taskDom= (function() {
         //Today
         let today_ul=document.createElement('ul');
         today_ul.classList.add('today_ul', 'task_category');
-        today_ul.textContent="Today";
+        let todaytxt = document.createElement('div');
+        todaytxt.classList.add('todaytxt', 'categorytxt');
+        todaytxt.textContent="Today";
+        maincontent.appendChild(todaytxt);
         today.forEach(x=> {
             let today_li=document.createElement('li');
             // today_li.classList.add('today_li', 'list_item');
@@ -39,7 +91,10 @@ taskDom= (function() {
         if(tomorrow.length>0) {
             let tomorrow_ul=document.createElement('ul');
             tomorrow_ul.classList.add('tomorrow_ul', 'task_category');
-            tomorrow_ul.textContent="Tomorrow";
+            let tomorrowtxt = document.createElement('div');
+            tomorrowtxt.classList.add('tomorrowtxt', 'categorytxt');
+            tomorrowtxt.textContent="Tomorrow";
+            maincontent.appendChild(tomorrowtxt);
             tomorrow.forEach(x=> {
                 let tomorrow_li=document.createElement('li');
                 // tomorrow_li.classList.add('tomorrow_li', 'list_item');
@@ -55,7 +110,10 @@ taskDom= (function() {
         if(upcomming.length>0) {
             let upcomming_ul=document.createElement('ul');
             upcomming_ul.classList.add('upcomming_ul', 'task_category');
-            upcomming_ul.textContent="Upcomming";
+            let upcommigntxt = document.createElement('div');
+            upcommigntxt.classList.add('upcommigntxt', 'categorytxt');
+            upcommigntxt.textContent="Upcomming";
+            maincontent.appendChild(upcommigntxt);
             upcomming.forEach(x=> {
                 let upcomming_li=document.createElement('li');
                 // upcomming_li.classList.add('upcomming_li', 'list_item');
@@ -90,6 +148,24 @@ taskDom= (function() {
             showCategories();        
         },500);
     }
+    function validateDone(e) {
+        let outer=e.currentTarget.parentElement;
+        // outer.classList.add('validate');
+        // outer.innerHTML='';
+        let id=outer.getAttribute('data-id');
+        setTimeout(()=>{            
+            outer.classList.add('validate');
+        outer.innerHTML='';
+             
+         },700);
+         setTimeout(()=> {
+            tasklogic.mytasks.validateTask(id); 
+            showCategories();
+         },1400);
+    }
+    function editTask(e) {
+        edittaskmodule.displayedit(e);
+    }
     function createTaskCard(t,option='') {
         let taskcard = document.createElement('div');
         taskcard.classList.add('taskcard');
@@ -113,6 +189,7 @@ taskDom= (function() {
         // if(t.priority>0)prio.classList.add(`prio${t.priority}`);
         if(t.priority>0)taskcard.classList.add(`prio${t.priority}`);
         else taskcard.classList.add(`prio0`);
+        taskcard.setAttribute('data-prio',`${t.priority}`);
         project.textContent=t.project;
         tasktitle.textContent=t.title;
         taskdescription.textContent=t.description;
@@ -135,17 +212,10 @@ taskDom= (function() {
         taskcard.setAttribute('data-id',t.id);
         checkbox.addEventListener('mouseup',check);
         trash.addEventListener('click',deleteTask);
+        edit.addEventListener('click',editTask);
         return taskcard;
     }
-    function validateDone(e) {
-        let target=e.currentTarget.parentElement;
-        setTimeout(()=>{
-            target.innerHTML='';
-            target.classList.add('validate');
-            //tasklogic.mytasks.completeTask(id); 
-            showCategories();
-        },500);
-    }
+    
     //----
-    return {showCategories};
+    return {showCategories, showProjects};
 })();

@@ -58,11 +58,33 @@ tasklogic = (function() {
             return t;
         }
         deleteTask(t) {
-            // this.tasks.find(t.id);
             for(let x=this.tasks.length-1;x>=0;x--) {
                 if(this.tasks[x].id===parseInt(t)){
                     let rec=this.tasks.splice(x,1);
                     this.trash.push(rec);
+                }
+            }
+        }
+        validateTask(t) {
+            for(let x=this.tasks.length-1;x>=0;x--) {
+                if(this.tasks[x].id===parseInt(t)){
+                    let rec=this.tasks.splice(x,1);
+                    this.accomplished.push(rec);
+                }
+            }
+        }
+        retrieveTask(id) {
+            for(let x=this.tasks.length-1;x>=0;x--) {
+                if(this.tasks[x].id===parseInt(id)){
+                    return this.tasks[x];
+                }
+            }
+        }
+        editTask(id,o) {
+            for(let x=this.tasks.length-1;x>=0;x--) {
+                if(this.tasks[x].id===parseInt(id)){
+                    o.id=parseInt(id);
+                    this.tasks[x]=o;
                 }
             }
         }
@@ -87,9 +109,11 @@ tasklogic = (function() {
 
 let projects=(function project(){
     let projectList=[];
+    let id=0;
     function addProject(s) {
         if(!findProjectExists(s)){
-            project.push(s);
+            id++;
+            projectList.push({id:id,name:s});
             return true;
         }
         else return false;
@@ -98,8 +122,8 @@ let projects=(function project(){
         return projectList;
     }
     function findProjectExists(s) {
-        for(let x=projectList.length;x>0;x--) {
-            if(projectList[x]===s)return true;
+        for(let x=projectList.length-1;x>=0;x--) {
+            if(projectList[x].name===s)return true;
         }
         return false;
     }

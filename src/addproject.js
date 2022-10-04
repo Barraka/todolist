@@ -19,6 +19,18 @@ function newprojectmodule() {
     projectlabel.textContent="What do you want to plan?"
     projectinput.setCustomValidity('Enter your new project');
     
+    let existingProjects = document.createElement('div');
+    existingProjects.classList.add('existingProjects');
+    existingProjects.textContent="Existing projects:";
+    let currentProjectList=projects.getProject();
+    currentProjectList.forEach(x=> {
+        let projectItem = document.createElement('div');
+        projectItem.classList.add('projectItem');
+        projectItem.textContent=x.name;
+        existingProjects.appendChild(projectItem);
+    });
+    // existingProjects.textContent=projects.getProject();
+
     let projecthint = document.createElement('div');
     projecthint.classList.add('projecthint');
     projecthint.textContent="Hint: you can easily assign an existing task to a new project by selecting its 'edit' button.";
@@ -31,10 +43,11 @@ function newprojectmodule() {
     
     modalbody.appendChild(projectlabel);
     modalbody.appendChild(projectinput);
+    modalbody.appendChild(existingProjects);
     modalbody.appendChild(projecthint);
     modalbody.appendChild(submittask);
     cancel.addEventListener('click',erasefields);
-    submittask.addEventListener('click',appendtask);
+    submittask.addEventListener('click',appendProject);
     projectinput.focus();
 
     function erasefields() {
@@ -42,12 +55,15 @@ function newprojectmodule() {
         for(ele of inputs)ele.value="";
         addmenu.hidemodal();
     }
-    function appendtask() {
+    function appendProject() {
         if(projectinput.value==="") {
             projectinput.reportValidity();
         }
         else {
             //add project
+            projects.addProject(projectinput.value);
+            projectinput.value="";
+            addmenu.hidemodal();
         }
     }
 }
