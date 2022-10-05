@@ -83,10 +83,19 @@ tasklogic = (function() {
         editTask(id,o) {
             for(let x=this.tasks.length-1;x>=0;x--) {
                 if(this.tasks[x].id===parseInt(id)){
-                    o.id=parseInt(id);
+                     o.id=parseInt(id);
                     this.tasks[x]=o;
                 }
             }
+        }
+        tasksPerProject(pid) {
+            let tempList=[];
+            for(let x=this.tasks.length-1;x>=0;x--) {
+                if(this.tasks[x].project===pid){
+                    tempList.push(this.tasks[x]);
+                }
+            }
+            return tempList;
         }
         get getallTasks() {
             return this.tasks;
@@ -107,31 +116,85 @@ tasklogic = (function() {
     return {overdue,today,tomorrow,upcomming,generateGroups,mytasks}
 })();
 
-let projects=(function project(){
+let projects=(function(){
     let projectList=[];
     let id=0;
     function addProject(s) {
-        if(!findProjectExists(s)){
-            id++;
+        id++;
             projectList.push({id:id,name:s});
-            return true;
-        }
-        else return false;
+            return id;
     }
     function getProject() {
         return projectList;
     }
-    function findProjectExists(s) {
+    function deleteProject(s) {
         for(let x=projectList.length-1;x>=0;x--) {
-            if(projectList[x].name===s)return true;
+            if(projectList[x].name===s)projectList.splice(x,1);
+            console.log(projectList);
         }
-        return false;
+    }
+    function getProjectName(s) {
+        for(let x=projectList.length-1;x>=0;x--) {
+            if(projectList[x].id===parseInt(s))return projectList[x].name;
+        }
+        return '';
+    }
+    function updateProjectName(id,s) {
+        for(let x=projectList.length-1;x>=0;x--) {
+            if(projectList[x].id===parseInt(id))projectList[x].name=s;
+        }
     }
     // -----
     return {
         addProject,
         getProject,
+        deleteProject,
+        getProjectName,
+        updateProjectName,
     }
+})();
+
+let listsLogic=(function(){
+    let id=0;
+    let listOfLists=[];
+    let newList
+    function createList(n) {
+        id++;
+        listOfLists.push({id:id,name:n,list:[]});
+    }
+    function addToList(id,t) {
+        for(let i=listOfLists.length-1;i>=0;i--) {
+            if(listOfLists[i].id===parseInt(id))listOfLists[i].list.push(t);
+        }
+    }
+    function deleteList(id) {
+        for(let i=listOfLists.length-1;i>=0;i--) {
+            if(listOfLists[i].id===parseInt(id))listOfLists.splice(i,1);
+        }
+    }
+    function deleteListItem(id,tid) {
+        for(let i=listOfLists.length-1;i>=0;i--) {
+            if(listOfLists[i].id===parseInt(id))listOfLists[i].list.splice(tid,1);
+        }
+    }
+    function renameList(id,s) {
+        for(let i=listOfLists.length-1;i>=0;i--) {
+            if(listOfLists[i].id===parseInt(id))listOfLists[i].name=s;
+        }
+    }
+    function renameListItem(id,tid,s) {
+        for(let i=listOfLists.length-1;i>=0;i--) {
+            if(listOfLists[i].id===parseInt(id))listOfLists[i].list[tid]=s;
+        }
+    }
+    function getfullList() {
+        return listOfLists;
+    }
+    function getListByID(id) {
+        return listOfLists[id];
+    }
+    //----
+    return {createList,addToList,deleteList,deleteListItem,renameList,renameListItem,getfullList,getListByID};
 })();
 
 

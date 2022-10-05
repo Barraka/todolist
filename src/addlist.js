@@ -16,6 +16,17 @@ function newlistmodule() {
     listinput.type="text";
     listlabel.textContent="Lists are great"
     listinput.setCustomValidity('Enter you new list');
+
+    let existingLists = document.createElement('div');
+    existingLists.classList.add('existingLists');
+    existingLists.textContent="Existing lists:";
+    let fullLists=listsLogic.getfullList();
+    for(let i=fullLists.length-1;i>=0;i--) {
+        let listName = document.createElement('div');
+        listName.classList.add('listName');
+        listName.textContent=fullLists[i].name;
+        existingLists.appendChild(listName);
+    }
     
     let listhint = document.createElement('div');
     listhint.classList.add('listhint');
@@ -30,6 +41,7 @@ function newlistmodule() {
     modalbody.appendChild(listlabel);
     modalbody.appendChild(listinput);
     modalbody.appendChild(listhint);
+    modalbody.appendChild(existingLists);
     modalbody.appendChild(submitlist);
     cancel.addEventListener('click',erasefields);
     submitlist.addEventListener('click',appendtask);
@@ -45,7 +57,10 @@ function newlistmodule() {
             listinput.reportValidity();
         }
         else {
-            //add project
+            listsLogic.createList(listinput.value);
+            listinput.value='';
+            addmenu.hidemodal();
+            taskDom.showCategories();
         }
     }
 }

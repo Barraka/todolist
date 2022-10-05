@@ -234,6 +234,7 @@ ul .prio3 {
     border:1px solid var(--light);
     border-radius: 100vw;
     padding: 10px 0;
+    position:relative;
 }
 .projectAddOuter {
     display: flex;
@@ -252,4 +253,17 @@ ul .prio3 {
 .partOfaProject {
     text-align: center;
     list-style:square;
+}
+.errorDiv {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;    
+    bottom:0;
+    background-color: var(--modalbg);
+    border-radius: 100vw;
+    text-align: center;
+    padding:10px;
+    fill:var(--light);
+    stroke:var(--light);
 }

@@ -201,10 +201,6 @@ let newtaskmodule=(()=> {
     }
     
     function appendtask() {
-        // let titleinput = document.querySelector('.titleinput');
-        // let descriptioninput = document.querySelector('.descriptioninput');
-        // let deadlineinput = document.querySelector('.deadlineinput');
-        //let project = document.querySelector('.project');
         if(titleinput.value==="") {
             titleinput.reportValidity();
         }
