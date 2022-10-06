@@ -2,6 +2,97 @@ taskDom= (function() {
     let maincontent = document.querySelector('.maincontent');
     function showLists() {
         maincontent.innerHTML='';
+        let allLists=listsLogic.getfullList();
+        let numberOfLists=allLists.length;
+        for(let i=0;i<numberOfLists;i++) {
+            let categoryOuter = document.createElement('div');
+            categoryOuter.classList.add('categoryOuter','grow-wrap');
+            categoryOuter.setAttribute('data-id',allLists[i].id);
+            let categoryInner = document.createElement('div');
+            categoryInner.classList.add('categoryInner');
+            let projectAddOuter = document.createElement('div');
+            projectAddOuter.classList.add('projectAddOuter');
+            let projectTitle = document.createElement('div');
+            projectTitle.classList.add('projectTitle', 'categorytxt');
+            projectTitle.textContent=allLists[i].name;
+            //add edit icon
+            let projectEditIcon = document.createElement('div');
+            projectEditIcon.classList.add('projectEditIcon');
+            projectEditIcon.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M9 39h2.2l22.15-22.15-2.2-2.2L9 36.8Zm30.7-24.3-6.4-6.4 2.1-2.1q.85-.85 2.1-.85t2.1.85l2.2 2.2q.85.85.85 2.1t-.85 2.1Zm-2.1 2.1L12.4 42H6v-6.4l25.2-25.2Zm-5.35-1.05-1.1-1.1 2.2 2.2Z"/></svg>';
+            let projectTrashIcon = document.createElement('div');
+            projectTrashIcon.classList.add('projectTrashIcon');
+            projectTrashIcon.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M13.05 42q-1.25 0-2.125-.875T10.05 39V10.5H8v-3h9.4V6h13.2v1.5H40v3h-2.05V39q0 1.2-.9 2.1-.9.9-2.1.9Zm21.9-31.5h-21.9V39h21.9Zm-16.6 24.2h3V14.75h-3Zm8.3 0h3V14.75h-3Zm-13.6-24.2V39Z"/></svg>';
+            //combine both to projectAddOuter
+            projectAddOuter.appendChild(projectTitle);
+            projectAddOuter.appendChild(projectEditIcon);
+            projectAddOuter.appendChild(projectTrashIcon);
+            categoryOuter.appendChild(projectAddOuter);
+            let textArea = document.createElement('textarea');
+            textArea.classList.add('textArea');
+            textArea.setAttribute('draggable','true');
+            categoryOuter.appendChild(textArea);
+            textArea.value=allLists[i].list;
+            
+            textArea.addEventListener('keydown',resizeBox);
+            
+            projectEditIcon.addEventListener('click',editListName);
+            projectTrashIcon.addEventListener('click',deleteList);
+            textArea.addEventListener('blur',updateData);
+            maincontent.appendChild(categoryOuter);
+            if(textArea.scrollHeight>20)textArea.style.height=textArea.scrollHeight+'px';
+        }
+        function resizeBox(e) {
+            if(e.key==='Enter') {
+                let currentHeight=e.currentTarget.clientHeight;
+                e.currentTarget.style.height=`calc(${currentHeight}px + 1em)`;
+            }
+        }
+        function editListName(e) {
+            let target=e.currentTarget.previousSibling;
+            target.setAttribute('contenteditable','true');
+            target.focus();
+            target.addEventListener('blur',stopEditListName);
+            target.addEventListener('keydown',stopEditListName);
+        }
+        function stopEditListName(e) {
+            if(e.type==='keydown' && e.key !=='Enter')return;
+            e.currentTarget.setAttribute('contenteditable','false');
+            let this_id=e.currentTarget.parentElement.parentElement.getAttribute('data-id');
+            let newName=e.currentTarget.textContent;
+            if(newName==='')e.currentTarget.textContent='Default';
+            else listsLogic.renameList(this_id,newName);
+            //projects.updateProjectName(pid,newName);
+        }
+        function updateData(e) {
+            let this_id=e.currentTarget.parentElement.getAttribute('data-id');
+            let updatedList=e.currentTarget.value;
+            listsLogic.updatelist(this_id,updatedList);
+        }
+        function deleteList(e) {
+        
+            let pName=e.currentTarget.parentElement.firstElementChild.textContent;
+            let pid=e.currentTarget.parentElement.parentElement.getAttribute('data-id');
+            let taskList=tasklogic.mytasks.tasksPerProject(pid);
+            if(taskList.length>0) {
+                let errorDiv = document.createElement('div');
+                errorDiv.classList.add('errorDiv'); 
+                let closeSvg = document.createElement('div');
+                closeSvg.classList.add('closeSvg');
+                closeSvg.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="m16.5 33.6 7.5-7.5 7.5 7.5 2.1-2.1-7.5-7.5 7.5-7.5-2.1-2.1-7.5 7.5-7.5-7.5-2.1 2.1 7.5 7.5-7.5 7.5ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 24q0-4.15 1.575-7.8 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24 4q4.15 0 7.8 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm0-3q7.1 0 12.05-4.975Q41 31.05 41 24q0-7.1-4.95-12.05Q31.1 7 24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24 41Zm0-17Z"/></svg>';
+                let errorText = document.createElement('div');
+                errorText.classList.add('errorText');
+                errorText.textContent='You cannot delete a project with existing tasks';
+                errorDiv.appendChild(errorText);
+                errorDiv.appendChild(closeSvg);
+                closeSvg.addEventListener('click',e=>errorDiv.remove());
+                e.currentTarget.parentElement.appendChild(errorDiv);
+            }
+            else {
+                projects.deleteProject(pName);
+                showProjects();
+            }
+            
+        }
     }
     function showProjects() {
         maincontent.innerHTML='';
@@ -49,8 +140,10 @@ taskDom= (function() {
         target.setAttribute('contenteditable','true');
         target.focus();
         target.addEventListener('blur',stopEditProjectName);
+        target.addEventListener('keydown',stopEditProjectName);
     }
     function stopEditProjectName(e) {
+        if(e.type==='keydown' && e.key !=='Enter')return;
         e.currentTarget.setAttribute('contenteditable','false');
         let pid=e.currentTarget.parentElement.parentElement.getAttribute('data-id');
         let newName=e.currentTarget.textContent;
@@ -235,6 +328,7 @@ taskDom= (function() {
         trash.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M13.05 42q-1.25 0-2.125-.875T10.05 39V10.5H8v-3h9.4V6h13.2v1.5H40v3h-2.05V39q0 1.2-.9 2.1-.9.9-2.1.9Zm21.9-31.5h-21.9V39h21.9Zm-16.6 24.2h3V14.75h-3Zm8.3 0h3V14.75h-3Zm-13.6-24.2V39Z"/></svg>';
         if(option==='none')deadline.textContent='Today';
         else if(option==='tomorrow')deadline.textContent=new Date(t.dueDate).toDateString().slice(0,3);
+        else if(t.dueDate==='')deadline.textContent='';
         else deadline.textContent=new Date(t.dueDate).toLocaleDateString();
     
         taskcard.appendChild(checkbox);
@@ -254,5 +348,5 @@ taskDom= (function() {
     }
     
     //----
-    return {showCategories, showProjects};
+    return {showCategories, showProjects, showLists};
 })();

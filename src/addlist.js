@@ -28,9 +28,9 @@ function newlistmodule() {
         existingLists.appendChild(listName);
     }
     
-    let listhint = document.createElement('div');
-    listhint.classList.add('listhint');
-    listhint.textContent="Hint: you can double click the shopping icon to set it to another list. It serves as a quick access.";
+    // let listhint = document.createElement('div');
+    // listhint.classList.add('listhint');
+    // listhint.textContent="Hint: you can double click the shopping icon to set it to another list. It serves as a quick access.";
     
     let submitlist= document.createElement('div');
     
@@ -40,7 +40,6 @@ function newlistmodule() {
     
     modalbody.appendChild(listlabel);
     modalbody.appendChild(listinput);
-    modalbody.appendChild(listhint);
     modalbody.appendChild(existingLists);
     modalbody.appendChild(submitlist);
     cancel.addEventListener('click',erasefields);
@@ -50,7 +49,9 @@ function newlistmodule() {
     function erasefields() {
         let inputs = modalbody.querySelectorAll('input');
         for(ele of inputs)ele.value="";
+        modalbody.innerHTML='';
         addmenu.hidemodal();
+        
     }
     function appendtask() {
         if(listinput.value==="") {
@@ -59,6 +60,8 @@ function newlistmodule() {
         else {
             listsLogic.createList(listinput.value);
             listinput.value='';
+            let modalbody = document.querySelector('.modalbody');
+            modalbody.innerHTML='';
             addmenu.hidemodal();
             taskDom.showCategories();
         }

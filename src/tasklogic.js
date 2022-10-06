@@ -14,8 +14,13 @@ tasklogic = (function() {
         today=[];
         tomorrow=[];
         upcomming=[];
-        sorted=mytasks.getallTasks.sort((a,b)=> {return new Date(a.dueDate) - new Date(b.dueDate);});
-        
+        let sorted=mytasks.getallTasks;
+        let sortedLength=sorted.length;
+        for(let i=0;i<sortedLength;i++) {
+            // if(sorted[i].dueDate==='')upcomming.push(sorted.splice(i,1)[0]);
+        }
+        //sorted=mytasks.getallTasks.sort((a,b)=> {return new Date(a.dueDate) - new Date(b.dueDate);});
+        sorted.sort((a,b)=> {return new Date(a.dueDate) - new Date(b.dueDate);});
         let now=new Date();
         let tomorrowdate=new Date();
         let yesterdaydate=new Date();
@@ -31,6 +36,7 @@ tasklogic = (function() {
             else if(compDate.getDate()===tomorrowdate.getDate() && compDate.getMonth()===tomorrowdate.getMonth() && compDate.getFullYear() && tomorrowdate.getFullYear())tomorrow.push(x);
             else upcomming.push(x);
         });
+        console.log(upcomming);
     }
     class Task {
         constructor (title,description="",dueDate="",priority="",project="") {
@@ -40,7 +46,7 @@ tasklogic = (function() {
             this.dueDate=dueDate;
             this.priority=priority;
             this.project=project;
-            if(this.dueDate==='')this.dueDate=new Date();
+            //if(this.dueDate==='')this.dueDate=new Date();
             }   
     }
     
@@ -54,7 +60,6 @@ tasklogic = (function() {
         newTask(o){
             let t=new Task(o.title,o.description,o.dueDate,o.priority,o.project);
             this.tasks.push(t);
-            console.log(t);
             return t;
         }
         deleteTask(t) {
@@ -113,7 +118,7 @@ tasklogic = (function() {
     }
     let mytasks=new AllTasks();
     //----
-    return {overdue,today,tomorrow,upcomming,generateGroups,mytasks}
+    return {overdue,today,tomorrow,upcomming,generateGroups,mytasks,sortTasks}
 })();
 
 let projects=(function(){
@@ -160,7 +165,7 @@ let listsLogic=(function(){
     let newList
     function createList(n) {
         id++;
-        listOfLists.push({id:id,name:n,list:[]});
+        listOfLists.push({id:id,name:n,list:''});
     }
     function addToList(id,t) {
         for(let i=listOfLists.length-1;i>=0;i--) {
@@ -187,6 +192,11 @@ let listsLogic=(function(){
             if(listOfLists[i].id===parseInt(id))listOfLists[i].list[tid]=s;
         }
     }
+    function updatelist(id,s) {
+        for(let i=listOfLists.length-1;i>=0;i--) {
+            if(listOfLists[i].id===parseInt(id))listOfLists[i].list=s;
+        }
+    }   
     function getfullList() {
         return listOfLists;
     }
@@ -194,7 +204,7 @@ let listsLogic=(function(){
         return listOfLists[id];
     }
     //----
-    return {createList,addToList,deleteList,deleteListItem,renameList,renameListItem,getfullList,getListByID};
+    return {createList,addToList,deleteList,deleteListItem,renameList,renameListItem,getfullList,getListByID,updatelist};
 })();
 
 

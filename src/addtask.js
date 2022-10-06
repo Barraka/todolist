@@ -66,7 +66,8 @@ let newtaskmodule=(()=> {
         prio2.setAttribute('data-prio','2');
         prio3.setAttribute('data-prio','3');
         
-        
+        let joinproject=apiGenerator.createElement(); 
+        /*
         let joinproject = document.createElement('div');
         joinproject.classList.add('joinproject');
         let ddlist=projects.getProject();
@@ -91,16 +92,15 @@ let newtaskmodule=(()=> {
         else projectddl = document.createElement('div');
         projectddl.classList.add('projectddl');
         //create drop-down list
-        if(ddlist.length===0) projectddl.textContent='No project created';
+        if(ddlist.length===0) projectddl.textContent='No project created';       
         let createProject = document.createElement('div');
         createProject.classList.add('createProject');
         createProject.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M22.5 38V25.5H10v-3h12.5V10h3v12.5H38v3H25.5V38Z"/></svg>';
-
-        
-        
         
         joinproject.textContent="Add to project:";
+        */
         
+
         let deadlineouter = document.createElement('div');
         deadlineouter.classList.add('formouter');
         let deadlinelabel = document.createElement('label');
@@ -129,8 +129,8 @@ let newtaskmodule=(()=> {
         
         priorityouter.appendChild(priorityinput);
         modalbody.appendChild(priorityouter);
-        joinproject.appendChild(projectddl);
-        joinproject.appendChild(createProject);
+        // joinproject.appendChild(projectddl);
+        // joinproject.appendChild(createProject);
         
         modalbody.appendChild(joinproject);
         deadlineouter.appendChild(deadlinelabel);
@@ -149,7 +149,7 @@ let newtaskmodule=(()=> {
         prio2.addEventListener('mouseout',priohintOut);
         prio3.addEventListener('mouseover',priohintOver);
         prio3.addEventListener('mouseout',priohintOut);
-        createProject.addEventListener('click',showAddProject);
+        // createProject.addEventListener('click',showAddProject);
         addmenu.setinitialStyle();
         titleinput.focus();
     }
@@ -176,6 +176,7 @@ let newtaskmodule=(()=> {
         let modalbody=document.querySelector('.modalbody');
         let inputs = modalbody.querySelectorAll('input');
         for(ele of inputs)ele.value="";
+        modalbody.innerHTML='';
         addmenu.hidemodal();
     }
     function taskAppendProject() {
@@ -188,7 +189,7 @@ let newtaskmodule=(()=> {
         let projectddl;
         if(ddlist.length) {
             projectddl=document.querySelector('select');
-            projectddl.remove();
+            // projectddl.remove();
             if(projectddl===null)projectddl = document.createElement('select');
             //set empty default
             let optiondiv = document.createElement('option');
@@ -205,10 +206,31 @@ let newtaskmodule=(()=> {
             titleinput.reportValidity();
         }
         else {
-            let pj=document.querySelector('.projectddl');
-            let returntask= {title:titleinput.value,description:descriptioninput.value, dueDate:deadlineinput.value, priority:priochosen,project:pj.value};
+            // let pj=document.querySelector('.projectddl');
+            // let returntask= {title:titleinput.value,description:descriptioninput.value, dueDate:deadlineinput.value, priority:priochosen,project:pj.value};
+            // erasefields();
+            // // addTask(returntask);
+            // tasklogic.mytasks.newTask(returntask);            
+            // taskDom.showCategories();
+
+
+
+            let para=document.querySelector('.projectddl');
+            let para2=document.querySelector('.joinproject select');
+            let projectObject=''
+            if(para2!==null) {
+                let index=para.selectedIndex;
+                let elem=para.querySelector(` :nth-child(${index+1})`);
+                let pid;
+                if(elem===null)pid='';
+                else pid=elem.getAttribute('data-pid');
+                projectObject={id:pid,name:para.value}
+            }
+
+
+            
+            let returntask= {title:titleinput.value,description:descriptioninput.value, dueDate:deadlineinput.value, priority:priochosen,project:projectObject};
             erasefields();
-            // addTask(returntask);
             tasklogic.mytasks.newTask(returntask);            
             taskDom.showCategories();
         }

@@ -27,6 +27,7 @@ let addmenu=(()=>{
         addoptions.appendChild(newlist);
         taskcontainerinner.appendChild(addoptions);
         taskcontainerinner.appendChild(modalbody);
+        // modalbody.appendChild(addoptions);
         newtask.addEventListener('click',newtaskmodule);
         newproject.addEventListener('click',newprojectmodule);
         newlist.addEventListener('click',newlistmodule);
@@ -42,18 +43,18 @@ let addmenu=(()=>{
 
     function manangeMenuStyles(e=newtask) {
         
-        removeMenuStyles();
+        //removeMenuStyles();
         // if(e.hasAttribute('class') && e.classList.contains('newtask'))newtask.classList.add('menuSelected');        
         // else e.currentTarget.classList.add('menuSelected');
-        e.currentTarget.classList.add('menuSelected');
+        //e.currentTarget.classList.add('menuSelected');
     }
     function removeMenuStyles() {
-        let addoptions = document.querySelector('.addoptions');
-        for(let x of addoptions.children)x.classList.remove('menuSelected');
+        // let addoptions = document.querySelector('.addoptions');
+        // for(let x of addoptions.children)x.classList.remove('menuSelected');
     }
     function setinitialStyle() {
-        let newtask = document.querySelector('.newtask');
-        newtask.classList.add('menuSelected');
+        // let newtask = document.querySelector('.newtask');
+        // newtask.classList.add('menuSelected');
     }
     function showmodal() {
         addmenu.createmenu();

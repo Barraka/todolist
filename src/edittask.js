@@ -159,10 +159,16 @@ let edittaskmodule=(()=> {
         else {
             let para=document.querySelector('.projectddl');
             let index=para.selectedIndex;
-            let elem=para.querySelector(` :nth-child(${index+1})`);
             let pid;
-            if(elem===null)pid='';
-            else pid=elem.getAttribute('data-pid');;
+            let test = document.querySelector('.joinproject select');
+            //In case no projects created, there will be no dd list
+            if(test===null) {
+                pid='';
+            }
+            else {
+                let elem=para.querySelector(` :nth-child(${index+1})`);
+                pid=elem.getAttribute('data-pid');
+            }            
             let returntask= {title:titleinput.value,description:descriptioninput.value, dueDate:deadlineinput.value, priority:priochosen,project:pid};
             erasefields();
             tasklogic.mytasks.editTask(this_id,returntask);            

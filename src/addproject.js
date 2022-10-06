@@ -53,7 +53,9 @@ function newprojectmodule() {
     function erasefields() {
         let inputs = modalbody.querySelectorAll('input');
         for(ele of inputs)ele.value="";
+        modalbody.innerHTML='';
         addmenu.hidemodal();
+        
     }
     function appendProject() {
         if(projectinput.value==="") {
@@ -63,7 +65,10 @@ function newprojectmodule() {
             //add project
             projects.addProject(projectinput.value);
             projectinput.value="";
+            let modalbody = document.querySelector('.modalbody');
+            modalbody.innerHTML='';
             addmenu.hidemodal();
+            taskDom.showCategories();
         }
     }
 }

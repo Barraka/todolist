@@ -142,7 +142,7 @@ body {
     padding-top: 2rem;
     padding-right: 1rem;
     height: fit-content;
-    min-height: 50vh;
+    min-height: 90vh;
     overflow: hidden;
     font-size: var(--fontmedium);
 }
@@ -235,7 +235,12 @@ ul .prio3 {
     border-radius: 100vw;
     padding: 10px 0;
     position:relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
+
 .projectAddOuter {
     display: flex;
     justify-content: center;
@@ -266,4 +271,20 @@ ul .prio3 {
     padding:10px;
     fill:var(--light);
     stroke:var(--light);
+}
+/* ----- Lists ----- */
+.categorytxt {
+    padding:5px 20px;
+    width:fit-content;
+}
+.textArea {
+    background-color: var(--light);
+    width:50%;
+    margin:0 auto;
+    color:black;
+    resize:vertical;
+    /* padding-top: 0.5em; */
+    padding: 0.5em 0;
+    height:fit-content;
+    /* height:200px; */
 }
