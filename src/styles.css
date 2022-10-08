@@ -239,21 +239,34 @@ ul .prio3 {
     align-items: center;
 }
 /* ------- Projects ------- */
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-direction: column;
+    width:100vw;
+    gap:15px;
+    padding-bottom:10px;
+}
 .categoryOuter {
     border:2px solid var(--light);
-    border-radius: 100vw;
+    border-radius: 20px;
     padding: 10px 0;
     position:relative;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
+    margin:10px;
 }
-
+.projectTitle {
+    flex:1;
+}
 .projectAddOuter {
     display: flex;
     justify-content: center;
     align-items: center;
+    width:100%;
     
 }
 .projectAddOuter svg {
@@ -265,8 +278,10 @@ ul .prio3 {
     stroke:cyan;
 }
 .partOfaProject {
-    text-align: center;
     list-style:square;
+    margin-left:50px;
+    color:var(--light);
+    font-size: var(--fontlarge);
 }
 .errorDiv {
     position:absolute;

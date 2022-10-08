@@ -102,6 +102,8 @@ taskDom= (function() {
         maincontent.innerHTML='';
         let theProjects=projects.getProject();
         let numberOfProjects=theProjects.length;
+        let wrapper = document.createElement('div');
+        wrapper.classList.add('wrapper');
         if(!numberOfProjects) {
             let categoryOuter = document.createElement('div');
             categoryOuter.classList.add('categoryOuter','grow-wrap');
@@ -130,6 +132,8 @@ taskDom= (function() {
             projectAddOuter.appendChild(projectEditIcon);
             projectAddOuter.appendChild(projectTrashIcon);
             categoryOuter.appendChild(projectAddOuter);
+            wrapper.appendChild(categoryOuter);
+            maincontent.appendChild(wrapper);
             let allTasks=tasklogic.mytasks.getallTasks;
 
             //Display project tasks:
@@ -143,7 +147,7 @@ taskDom= (function() {
             }
             projectEditIcon.addEventListener('click',editProjectName);
             projectTrashIcon.addEventListener('click',deleteProject);
-            maincontent.appendChild(categoryOuter);
+            
         }
     function editProjectName(e) {
         let target=e.currentTarget.previousSibling;
