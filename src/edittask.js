@@ -135,9 +135,9 @@ let edittaskmodule=(()=> {
         //Add event listeners:
         submit.addEventListener('click',modifytask);
         cancel.addEventListener('click',erasefields);
-        prio1.addEventListener('click',chooseprio);
-        prio2.addEventListener('click',chooseprio);
-        prio3.addEventListener('click',chooseprio);
+        prio1.addEventListener('mousedown',chooseprio);
+        prio2.addEventListener('mousedown',chooseprio);
+        prio3.addEventListener('mousedown',chooseprio);
         prio1.addEventListener('mouseover',priohintOver);
         prio1.addEventListener('mouseout',priohintOut);
         prio2.addEventListener('mouseover',priohintOver);
@@ -178,11 +178,15 @@ let edittaskmodule=(()=> {
         if(priochosen===parseInt(e.target.getAttribute('data-prio'))) {
             priochosen='';
             e.target.classList.remove('prioselect');
+            e.currentTarget.style.border='';
         }
         else {
             priochosen=parseInt(e.target.getAttribute('data-prio'));
-            for(x of priorityinput.children)x.classList.remove('prioselect');
-            e.target.classList.add('prioselect');
+            for(x of priorityinput.children){
+                x.classList.remove('prioselect');
+                x.style.border='';
+            }
+            e.currentTarget.style.border='3px solid cyan';
         }
     }        
     function priohintOver(e) {

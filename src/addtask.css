@@ -7,8 +7,7 @@
     z-index: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
-    
+    align-items: center;    
 }
 .taskcontainerhidden {
     transform: scale(0) translateY(-100%);
@@ -21,8 +20,6 @@
     flex-direction: column;    
     text-align: center;
     color:var(--light);
-    height:fit-content;
-    height:100vh;
     position:relative;    
     max-width: 700px;
     width:90%;
@@ -63,7 +60,6 @@
     max-width: 700px;
     width:100%;
     background-color: var(--modalbg);
-    min-height: 70%;
 }
 .cancel {
     position:absolute;
@@ -155,7 +151,7 @@ input:focus, textarea:focus {
     transition: all 0.2s ease-in;
 }
 .prioselect {
-    transform: scale(1.2);
+    /* transform: scale(1.2); */
     border:3px solid cyan;
 }
 .joinproject {
