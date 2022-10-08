@@ -62,6 +62,7 @@
     width:100%;
     background-color: var(--modalbg);
     user-select: none;
+    font-size: var(--fontlarge);
 }
 .cancel {
     position:absolute;
