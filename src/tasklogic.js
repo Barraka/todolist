@@ -3,23 +3,14 @@ tasklogic = (function() {
     let overdue=[];
     let today=[];
     let tomorrow=[];
-    let upcomming=[];
-    
+    let upcomming=[];    
 
-    function retrieveTasks() {
-        //set the last id
-    }
     function sortTasks() {
         overdue=[];
         today=[];
         tomorrow=[];
         upcomming=[];
         let sorted=mytasks.getallTasks;
-        let sortedLength=sorted.length;
-        for(let i=0;i<sortedLength;i++) {
-            // if(sorted[i].dueDate==='')upcomming.push(sorted.splice(i,1)[0]);
-        }
-        //sorted=mytasks.getallTasks.sort((a,b)=> {return new Date(a.dueDate) - new Date(b.dueDate);});
         sorted.sort((a,b)=> {return new Date(a.dueDate) - new Date(b.dueDate);});
         let now=new Date();
         let tomorrowdate=new Date();
@@ -39,27 +30,41 @@ tasklogic = (function() {
         console.log(upcomming);
     }
     class Task {
-        constructor (title,description="",dueDate="",priority="",project="") {
-            this.id=++id;
+        constructor (title,description="",dueDate="",priority="",project="", existingID='') {
+            if(existingID){
+                this.id=existingID;
+                if(parseInt(existingID)>id)id=parseInt(existingID);
+            }
+            else this.id=++id;
             this.title=title;
             this.description=description;
             this.dueDate=dueDate;
             this.priority=priority;
             this.project=project;
-            //if(this.dueDate==='')this.dueDate=new Date();
             }   
-    }
-    
+    }    
     class AllTasks {
         constructor() {
+            let existingData=localStorage.getItem('mytasks');
+            console.log(existingData);
             this.tasks=[];
             this.accomplished=[];
             this.trash=[];
+            if(existingData){
+                let retrievedData=JSON.parse(existingData);
+                for(let i=retrievedData.length-1;i>=0;i--) {
+                    let thisTask=new Task(retrievedData[i].title,retrievedData[i].description,retrievedData[i].dueDate,retrievedData[i].priority,retrievedData[i].project,retrievedData[i].id)
+                    this.tasks.push(thisTask);
+                }
+            }
         }
-        // newTask(title,description="",dueDate="",priority="",project=""){
+        printTasks() {
+            console.log(JSON.parse(localStorage.getItem('mytasks')));
+        }
         newTask(o){
             let t=new Task(o.title,o.description,o.dueDate,o.priority,o.project);
             this.tasks.push(t);
+            localStorage.setItem('mytasks',JSON.stringify(this.tasks));
             return t;
         }
         deleteTask(t) {
@@ -69,6 +74,7 @@ tasklogic = (function() {
                     this.trash.push(rec);
                 }
             }
+            localStorage.setItem('mytasks',JSON.stringify(this.tasks));
         }
         validateTask(t) {
             for(let x=this.tasks.length-1;x>=0;x--) {
@@ -77,6 +83,7 @@ tasklogic = (function() {
                     this.accomplished.push(rec);
                 }
             }
+            localStorage.setItem('mytasks',JSON.stringify(this.tasks));
         }
         retrieveTask(id) {
             for(let x=this.tasks.length-1;x>=0;x--) {
@@ -88,8 +95,19 @@ tasklogic = (function() {
         editTask(id,o) {
             for(let x=this.tasks.length-1;x>=0;x--) {
                 if(this.tasks[x].id===parseInt(id)){
-                     o.id=parseInt(id);
-                    this.tasks[x]=o;
+                    this.tasks[x].title=o.title;
+                    this.tasks[x].description=o.description;
+                    this.tasks[x].dueDate=o.dueDate;
+                    this.tasks[x].priority=o.priority;
+                    this.tasks[x].project=o.project;
+                }
+            }
+            localStorage.setItem('mytasks',JSON.stringify(this.tasks));
+        }
+        getProjectID(id) {
+            for(let x=this.tasks.length-1;x>=0;x--) {
+                if(this.tasks[x].id===parseInt(id)){
+                    return this.tasks[x].project;
                 }
             }
         }
@@ -115,7 +133,7 @@ tasklogic = (function() {
     function generateGroups() {
         sortTasks();
         return{overdue,today,tomorrow,upcomming};
-    }
+    }    
     let mytasks=new AllTasks();
     //----
     return {overdue,today,tomorrow,upcomming,generateGroups,mytasks,sortTasks}
@@ -124,10 +142,19 @@ tasklogic = (function() {
 let projects=(function(){
     let projectList=[];
     let id=0;
+    let existingData=JSON.parse(localStorage.getItem('myprojects'));
+    if(existingData){
+        projectList=existingData;
+        console.log(projectList);
+        for(let i=projectList.length-1;i>=0;i--) {
+            if(projectList[i].id>id)id=projectList[i].id;
+        }
+    }
     function addProject(s) {
         id++;
-            projectList.push({id:id,name:s});
-            return id;
+        projectList.push({id:id,name:s});
+        localStorage.setItem('myprojects',JSON.stringify(projectList));
+        return id;
     }
     function getProject() {
         return projectList;
@@ -135,8 +162,8 @@ let projects=(function(){
     function deleteProject(s) {
         for(let x=projectList.length-1;x>=0;x--) {
             if(projectList[x].name===s)projectList.splice(x,1);
-            console.log(projectList);
         }
+        localStorage.setItem('myprojects',JSON.stringify(projectList));
     }
     function getProjectName(s) {
         for(let x=projectList.length-1;x>=0;x--) {
@@ -148,6 +175,7 @@ let projects=(function(){
         for(let x=projectList.length-1;x>=0;x--) {
             if(projectList[x].id===parseInt(id))projectList[x].name=s;
         }
+        localStorage.setItem('myprojects',JSON.stringify(projectList));
     }
     // -----
     return {
@@ -162,20 +190,29 @@ let projects=(function(){
 let listsLogic=(function(){
     let id=0;
     let listOfLists=[];
-    let newList
+    let existingData=localStorage.getItem('mylists');
+    if(existingData){
+        listOfLists=JSON.parse(existingData);
+        for(let i=listOfLists.length-1;i>=0;i--) {
+            if(listOfLists[i].id>id)id=listOfLists[i].id;
+        }
+    }
     function createList(n) {
         id++;
         listOfLists.push({id:id,name:n,list:''});
+        localStorage.setItem('mylists',JSON.stringify(listOfLists));
     }
     function addToList(id,t) {
         for(let i=listOfLists.length-1;i>=0;i--) {
             if(listOfLists[i].id===parseInt(id))listOfLists[i].list.push(t);
         }
+        localStorage.setItem('mylists',JSON.stringify(listOfLists));
     }
     function deleteList(id) {
         for(let i=listOfLists.length-1;i>=0;i--) {
             if(listOfLists[i].id===parseInt(id))listOfLists.splice(i,1);
         }
+        localStorage.setItem('mylists',JSON.stringify(listOfLists));
     }
     function deleteListItem(id,tid) {
         for(let i=listOfLists.length-1;i>=0;i--) {
@@ -191,11 +228,13 @@ let listsLogic=(function(){
         for(let i=listOfLists.length-1;i>=0;i--) {
             if(listOfLists[i].id===parseInt(id))listOfLists[i].list[tid]=s;
         }
+        localStorage.setItem('mylists',JSON.stringify(listOfLists));
     }
     function updatelist(id,s) {
         for(let i=listOfLists.length-1;i>=0;i--) {
             if(listOfLists[i].id===parseInt(id))listOfLists[i].list=s;
         }
+        localStorage.setItem('mylists',JSON.stringify(listOfLists));
     }   
     function getfullList() {
         return listOfLists;
@@ -206,5 +245,3 @@ let listsLogic=(function(){
     //----
     return {createList,addToList,deleteList,deleteListItem,renameList,renameListItem,getfullList,getListByID,updatelist};
 })();
-
-

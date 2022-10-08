@@ -52,13 +52,7 @@
     padding:0.5rem;
     border-radius: 10px;
 }
-.newitem:hover {
-    background-color: rgb(36, 194, 206);
-    /* border:2px solid rgb(36, 194, 206); */
-    /* border-radius: 10px; */
-    color:var(--titledark);
-    
-}
+
 .modalbody {
     display: flex;
     justify-content: space-evenly;
@@ -105,7 +99,7 @@ input, textarea {
     color:var(--light);
 }
 input {
-    font-size: 1.5em;
+    font-size: var(--fontmedium);
 }
 textarea {
     font-size: 1em;
@@ -211,9 +205,7 @@ label, input, textarea, .formouter {
     font-size: var(--fontsmall);
     color:black;
 }
-.projectddl {
-    min-width: 60px;
-}
+
 .projectDiv svg {
     transform: scale(0.7);
     cursor: pointer;
@@ -260,7 +252,10 @@ input[type='date'] {
     padding: 5px;
     margin:5px;
     border-radius: 5px;
+    min-width: 60px;
+    color:var(--titledark);
 }
+
 .createProject {
     fill:var(--light);
     stroke:var(--light);
@@ -273,12 +268,15 @@ input[type='date'] {
 }
 /* -------- Add project -------- */
 .menuSelected {
-    background-color: var(--modalbg);
+    background-color: var(--modalMenuSelected);
     color:var(--light);
 }
+.newitem:hover:not(.menuSelected) {
+    background-color: rgb(36, 194, 206);
+    color:var(--titledark);
+}
 .menuSelected:hover {
-    background-color: var(--modalbg);
-    color:var(--light);
+    
 } 
 .projectlabel, .listlabel {
     margin: 20px;
@@ -317,10 +315,14 @@ align-items: center;
 .joinproject {
     fill:var(--light);
     stroke:var(--light);
+    color:black;
 }
 .existingLists {
     color:black;
 }
 .listName {
     color:var(--light);
+}
+.listlabel, .projectlabel {
+    color:black;
 }

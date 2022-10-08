@@ -1,7 +1,4 @@
-let trythis=1;
-//----Add task layout
-let edittaskmodule=(()=> {
-    
+let edittaskmodule=(()=> {    
     let maincontent = document.querySelector('.maincontent');
     let priochosen='';
     let prioritylabel2;
@@ -9,12 +6,9 @@ let edittaskmodule=(()=> {
     let titleinput;
     let descriptioninput;
     let deadlineinput;
-    let projectinput="";
-    let projectddl;
-
     let this_id;
     function displayedit(e) {   
-        //Create divs & cancel button
+        //Create elements:
         let modalouter = document.createElement('div');
         modalouter.classList.add('modalouter');
         let modalbody = document.createElement('div');
@@ -79,6 +73,8 @@ let edittaskmodule=(()=> {
         prio1.setAttribute('data-prio','1');
         prio2.setAttribute('data-prio','2');
         prio3.setAttribute('data-prio','3');       
+
+        //Add project
         let joinproject=apiGenerator.createElement();        
 
         //Deadline
@@ -126,7 +122,17 @@ let edittaskmodule=(()=> {
         if(priochosen>0) {
             eval(`prio${priochosen}`).classList.add('prioselect');
         }
+        //Automatically select previously chosen project
+        let currentPID=tasklogic.mytasks.getProjectID(this_id);
+        if(currentPID>0) {
+            let projectddl = document.querySelector('.projectddl').childNodes;
+            projectddl.forEach(x=> {
+                if(x.getAttribute('data-pid')===currentPID)x.setAttribute('selected','true');
+            });
+            
+        }
 
+        //Add event listeners:
         submit.addEventListener('click',modifytask);
         cancel.addEventListener('click',erasefields);
         prio1.addEventListener('click',chooseprio);
@@ -141,17 +147,10 @@ let edittaskmodule=(()=> {
         titleinput.focus();
         
     }
-    function updateProjectValue() {
-        let projectddl = document.querySelector('.projectddl');
-        projectinput=projectddl.value;
-        console.log(projectddl);
-    }
-    
     function erasefields() {
         let modalouter = document.querySelector('.modalouter');
         modalouter.remove();
-    }
-    
+    }    
     function modifytask() {
         if(titleinput.value==="") {
             titleinput.reportValidity();
@@ -185,8 +184,7 @@ let edittaskmodule=(()=> {
             for(x of priorityinput.children)x.classList.remove('prioselect');
             e.target.classList.add('prioselect');
         }
-    }
-        
+    }        
     function priohintOver(e) {
         let temp=parseInt(e.target.getAttribute('data-prio'));
         let val;
@@ -199,6 +197,5 @@ let edittaskmodule=(()=> {
         prioritylabel2.textContent='';
     }
     // ----
-    return {displayedit}
-    
+    return {displayedit}    
 })();

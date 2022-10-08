@@ -7,15 +7,16 @@ let newtaskmodule=(()=> {
     let titleinput;
     let descriptioninput;
     let deadlineinput;
-    let projectinput="";
-    function displaytask() {        
+    function displaytask() {  
+        priochosen='';     
         let modalbody=document.querySelector('.modalbody');
         modalbody.innerHTML="";
         let cancel = document.createElement('div');
         cancel.classList.add('cancel');
         cancel.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="m16.5 33.6 7.5-7.5 7.5 7.5 2.1-2.1-7.5-7.5 7.5-7.5-2.1-2.1-7.5 7.5-7.5-7.5-2.1 2.1 7.5 7.5-7.5 7.5ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 24q0-4.15 1.575-7.8 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24 4q4.15 0 7.8 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm0-3q7.1 0 12.05-4.975Q41 31.05 41 24q0-7.1-4.95-12.05Q31.1 7 24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24 41Zm0-17Z"/></svg>';
         modalbody.appendChild(cancel);
-    
+        
+        //Title section:
         let titleouter = document.createElement('div');
         titleouter.classList.add('formouter');
         let titlelabel = document.createElement('label');
@@ -29,6 +30,7 @@ let newtaskmodule=(()=> {
         titleinput.type="text";
         titleinput.setCustomValidity('Enter the task you want to set');
         
+        //Description section:
         let descriptionouter = document.createElement('div');
         descriptionouter.classList.add('formouter');
         let descriptionlabel = document.createElement('label');
@@ -41,6 +43,7 @@ let newtaskmodule=(()=> {
         descriptioninput.type="text";
         descriptioninput.rows=2;
         
+        //Priority section:
         let priorityouter = document.createElement('div');
         priorityouter.classList.add('formouter', 'prioOuter');
         let prioLabelOuter = document.createElement('div');
@@ -54,7 +57,6 @@ let newtaskmodule=(()=> {
         let prio1 = document.createElement('div');
         let prio2 = document.createElement('div');
         let prio3 = document.createElement('div');
-        
         prioritylabel.textContent="Set priority:";
         priorityinput.appendChild(prio1);
         priorityinput.appendChild(prio2);
@@ -66,41 +68,10 @@ let newtaskmodule=(()=> {
         prio2.setAttribute('data-prio','2');
         prio3.setAttribute('data-prio','3');
         
+        //Project section:
         let joinproject=apiGenerator.createElement(); 
-        /*
-        let joinproject = document.createElement('div');
-        joinproject.classList.add('joinproject');
-        let ddlist=projects.getProject();
-        let projectddl;
-        if(ddlist.length) {
-            projectddl = document.createElement('select');
-            //set empty default
-            let optiondiv = document.createElement('option');
-            optiondiv.classList.add('optiondiv');
-            optiondiv.setAttribute('value',``);
-            optiondiv.textContent='';
-            projectddl.appendChild(optiondiv);
-            //populate with existing projects
-            for(let i=ddlist.length-1;i>=0;i--) {
-                let optiondiv = document.createElement('option');
-                optiondiv.classList.add('optiondiv');
-                optiondiv.setAttribute('value',`${ddlist[i].name}`);
-                optiondiv.textContent=ddlist[i].name;
-                projectddl.appendChild(optiondiv);
-            }            
-        }
-        else projectddl = document.createElement('div');
-        projectddl.classList.add('projectddl');
-        //create drop-down list
-        if(ddlist.length===0) projectddl.textContent='No project created';       
-        let createProject = document.createElement('div');
-        createProject.classList.add('createProject');
-        createProject.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M22.5 38V25.5H10v-3h12.5V10h3v12.5H38v3H25.5V38Z"/></svg>';
-        
-        joinproject.textContent="Add to project:";
-        */
-        
 
+        //Deadline section:
         let deadlineouter = document.createElement('div');
         deadlineouter.classList.add('formouter');
         let deadlinelabel = document.createElement('label');
@@ -110,12 +81,12 @@ let newtaskmodule=(()=> {
         deadlinelabel.textContent="Due:";
         deadlineinput.type="date";
         
-        let submit = document.createElement('div');
-        
-        submit.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" height="80" width="80" viewBox="0 0 50 50"><path d="M22.65 34h3v-8.3H34v-3h-8.35V14h-3v8.7H14v3h8.65ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 23.95q0-4.1 1.575-7.75 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24.05 4q4.1 0 7.75 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm.05-3q7.05 0 12-4.975T41 23.95q0-7.05-4.95-12T24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24.05 41ZM24 24Z"/></svg>';
-        
+        //Submit:
+        let submit = document.createElement('div');        
+        submit.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" height="80" width="80" viewBox="0 0 50 50"><path d="M22.65 34h3v-8.3H34v-3h-8.35V14h-3v8.7H14v3h8.65ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 23.95q0-4.1 1.575-7.75 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24.05 4q4.1 0 7.75 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm.05-3q7.05 0 12-4.975T41 23.95q0-7.05-4.95-12T24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24.05 41ZM24 24Z"/></svg>';        
         submit.classList.add('submit');
         
+        //Mount elements:
         titleouter.appendChild(titlelabel);
         titleouter.appendChild(titleinput);
         modalbody.appendChild(titleouter);
@@ -125,21 +96,17 @@ let newtaskmodule=(()=> {
         prioLabelOuter.appendChild(prioritylabel);
         prioLabelOuter.appendChild(prioritylabel2);
         priorityouter.appendChild(prioLabelOuter);
-        // priorityouter.appendChild(prioritylabel2);
-        
         priorityouter.appendChild(priorityinput);
         modalbody.appendChild(priorityouter);
-        // joinproject.appendChild(projectddl);
-        // joinproject.appendChild(createProject);
-        
         modalbody.appendChild(joinproject);
         deadlineouter.appendChild(deadlinelabel);
         deadlineouter.appendChild(deadlineinput);
         modalbody.appendChild(deadlineouter);        
         modalbody.appendChild(submit);
 
+        //Add event listeners:
         submit.addEventListener('click',appendtask);
-        cancel.addEventListener('click',erasefields);
+        cancel.addEventListener('click',()=>{addmenu.hidemodal()});
         prio1.addEventListener('click',chooseprio);
         prio2.addEventListener('click',chooseprio);
         prio3.addEventListener('click',chooseprio);
@@ -149,8 +116,6 @@ let newtaskmodule=(()=> {
         prio2.addEventListener('mouseout',priohintOut);
         prio3.addEventListener('mouseover',priohintOver);
         prio3.addEventListener('mouseout',priohintOut);
-        // createProject.addEventListener('click',showAddProject);
-        addmenu.setinitialStyle();
         titleinput.focus();
     }
     function showAddProject() {
@@ -172,13 +137,6 @@ let newtaskmodule=(()=> {
         projectDiv.classList.add('projectDivAdd');
         projectDivSvg.addEventListener('click',taskAppendProject);
     }
-    function erasefields() {
-        let modalbody=document.querySelector('.modalbody');
-        let inputs = modalbody.querySelectorAll('input');
-        for(ele of inputs)ele.value="";
-        modalbody.innerHTML='';
-        addmenu.hidemodal();
-    }
     function taskAppendProject() {
         let joinproject = document.querySelector('.joinproject');
         let projectDiv = document.querySelector('.projectDiv');
@@ -189,9 +147,7 @@ let newtaskmodule=(()=> {
         let projectddl;
         if(ddlist.length) {
             projectddl=document.querySelector('select');
-            // projectddl.remove();
             if(projectddl===null)projectddl = document.createElement('select');
-            //set empty default
             let optiondiv = document.createElement('option');
             optiondiv.classList.add('optiondiv');
             optiondiv.setAttribute('value',`${newProjectName}`);
@@ -206,15 +162,6 @@ let newtaskmodule=(()=> {
             titleinput.reportValidity();
         }
         else {
-            // let pj=document.querySelector('.projectddl');
-            // let returntask= {title:titleinput.value,description:descriptioninput.value, dueDate:deadlineinput.value, priority:priochosen,project:pj.value};
-            // erasefields();
-            // // addTask(returntask);
-            // tasklogic.mytasks.newTask(returntask);            
-            // taskDom.showCategories();
-
-
-
             let para=document.querySelector('.projectddl');
             let para2=document.querySelector('.joinproject select');
             let projectObject=''
@@ -224,15 +171,12 @@ let newtaskmodule=(()=> {
                 let pid;
                 if(elem===null)pid='';
                 else pid=elem.getAttribute('data-pid');
-                projectObject={id:pid,name:para.value}
+                projectObject=pid;
             }
-
-
-            
-            let returntask= {title:titleinput.value,description:descriptioninput.value, dueDate:deadlineinput.value, priority:priochosen,project:projectObject};
-            erasefields();
-            tasklogic.mytasks.newTask(returntask);            
-            taskDom.showCategories();
+        let returntask= {title:titleinput.value,description:descriptioninput.value, dueDate:deadlineinput.value, priority:priochosen,project:projectObject};
+        tasklogic.mytasks.newTask(returntask);         
+        addmenu.hidemodal();   
+        taskDom.showCategories();
         }
     }
     function chooseprio(e) {
@@ -245,8 +189,7 @@ let newtaskmodule=(()=> {
             for(x of priorityinput.children)x.classList.remove('prioselect');
             e.target.classList.add('prioselect');
         }
-    }
-        
+    }        
     function priohintOver(e) {
         let temp=parseInt(e.target.getAttribute('data-prio'));
         let val;
@@ -259,6 +202,5 @@ let newtaskmodule=(()=> {
         prioritylabel2.textContent='';
     }
     // ----
-    return {displaytask,erasefields,appendtask,showAddProject}
-    
+    return {displaytask}    
 })();

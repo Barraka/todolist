@@ -16,9 +16,9 @@
     --dark:rgb(75, 75, 75);
     --light:rgb(194, 194, 194);
     --background:rgb(194, 194, 194);
-    --modalbg:#2F4858;
+    --modalbg:rgb(47, 72, 88);
     --category:rgb(194, 194, 194);
-
+    --modalMenuSelected:rgb(21, 33, 41);
 }
 li {
     list-style: none;
@@ -225,13 +225,21 @@ ul .prio3 {
     /* transform:scale(0); */
     transform:translateX(120%);
 }
-.edit, .deadline, .project, .taskdescription {
+.deadline, .project, .taskdescription {
     flex-basis: var(--flexbasis);
     overflow:hidden;
 }
+.taskdescription {
+    color:var(--dark);
+}
+.edit, .trash {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 /* ------- Projects ------- */
 .categoryOuter {
-    border:1px solid var(--light);
+    border:2px solid var(--light);
     border-radius: 100vw;
     padding: 10px 0;
     position:relative;
