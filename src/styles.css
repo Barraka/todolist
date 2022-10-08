@@ -30,6 +30,7 @@ li {
         --fontsmall: 0.5em;
         --fontmedium: 0.75em;
         --fontlarge: 1.25em;
+        --fontVeryLarge: 2em;
         --svgscale:0.5;
         --cardgap:2px;
         --flexbasis:0.5;
@@ -42,6 +43,7 @@ li {
         --fontsmall: 0.8em;
         --fontmedium: 1.1em;
         --fontlarge: 1.3em;
+        --fontVeryLarge: 2em;
         --svgscale:0.7;
         --cardgap:1em;
         --flexbasis:0.5;
@@ -72,9 +74,8 @@ body {
     align-items: center;
     background-color: var(--titlebg);
     color:var(--titletxt);
-    font-size: 2em;
+    font-size: var(--fontVeryLarge);
     padding: 0.5rem;
-    /* width:100%; */
 }
 .menuaccess, .adddiv, .cart {
     display: flex;
@@ -120,7 +121,7 @@ body {
     justify-content: space-between;
     align-items: center;
     background-color: var(--light);
-    font-size: 1.5rem;
+    font-size: var(--fontlarge);
     text-align: center;
     position:relative;
 }
