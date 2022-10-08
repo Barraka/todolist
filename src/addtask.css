@@ -27,7 +27,7 @@
 .addoptions {
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
+    align-items: stretch;
     font-size: var(--font-large);
     width:100%;
     cursor: pointer;
@@ -40,7 +40,8 @@
     width:100%;
     padding:0.5rem;
     border-radius: 10px;
-    height:100%;
+    min-height:100%;
+    flex:1;
     display: flex;
     justify-content: center;
     align-items: center;
