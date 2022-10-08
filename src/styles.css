@@ -292,7 +292,7 @@ ul .prio3 {
     margin:0 auto;
     color:black;
     resize:vertical;
-    font-size: var(--fontmedium);
+    font-size: var(--fontlarge);
     /* padding-top: 0.5em; */
     padding: 0.5em 0;
     height:fit-content;
