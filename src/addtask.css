@@ -23,6 +23,7 @@
     position:relative;    
     max-width: 700px;
     width:90%;
+    font-size: var(--fontlarge);
 }
 .addoptions {
     display: flex;
@@ -77,6 +78,7 @@
     stroke:red;
     fill:red;
 }
+
 /* -------- form elements -------- */
 input, textarea {
     text-align: center;
@@ -274,6 +276,8 @@ input[type='date'] {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0 10px;
+    font-size:var(--fontlarge);
 }
 .existingProjects {
     color:black;

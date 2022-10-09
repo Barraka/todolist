@@ -33,7 +33,8 @@ let addmenu=(()=>{
         newlist.addEventListener('click',manangeMenuStyles);
         newtask.addEventListener('click',manangeMenuStyles);
         let linkcontent = document.querySelector('.links');
-        linkcontent.appendChild(taskcontainer);
+        let maincontent = document.querySelector('.maincontent');
+        maincontent.appendChild(taskcontainer);
         removeMenuStyles();
         setinitialStyle();
     }
