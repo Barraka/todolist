@@ -156,7 +156,6 @@ input:focus, textarea:focus {
     transition: all 0.2s ease-in;
 }
 .prioselect {
-    /* transform: scale(1.2); */
     border:3px solid cyan;
 }
 .joinproject {
