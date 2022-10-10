@@ -1,8 +1,11 @@
+import {projects} from './tasklogic.js';
+
 let apiGenerator = (function() {
     function createElement() {
         let joinproject = document.createElement('div');
         joinproject.classList.add('joinproject');
         let ddlist=projects.getProject();
+        let projectddl;
         if(ddlist.length) {
             projectddl = document.createElement('select');
             //set empty default
@@ -77,12 +80,12 @@ let apiGenerator = (function() {
         let thisInput = document.querySelector('.projectDivInput');
         thisInput.setCustomValidity('This field must not be empty');
         let newProjectName=thisInput.value;
-        projectinput=newProjectName;
+        // projectinput=newProjectName;
         if(newProjectName==='') {
             thisInput.reportValidity();
             return;
         }
-        let pid=projects.addProject(newProjectName);
+        projects.addProject(newProjectName);
         projectDiv.remove();
         let ddlist=projects.getProject();
         if(ddlist.length) {
@@ -115,3 +118,5 @@ let apiGenerator = (function() {
     //----
     return{createElement};
 }());
+
+export default apiGenerator;

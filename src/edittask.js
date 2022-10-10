@@ -1,3 +1,7 @@
+import apiGenerator from './editProjectAPI';
+import tasklogic from './tasklogic.js';
+import taskDom from './taskDom.js';
+
 let edittaskmodule=(()=> {    
     let maincontent = document.querySelector('.maincontent');
     let priochosen='';
@@ -48,7 +52,7 @@ let edittaskmodule=(()=> {
         descriptionlabel.for="desc";
         descriptioninput.id="desc";
         descriptioninput.placeholder="A brief description...";
-        descriptioninput.type="text";
+        // descriptioninput.type="text";
         descriptioninput.rows=2;
         
         //Priority
@@ -91,7 +95,7 @@ let edittaskmodule=(()=> {
         titleinput.value=this_task.title;
         descriptioninput.value=this_task.description;
         titleinput.value=this_task.title;
-        projectinput=this_task.project;
+        // projectinput=this_task.project;
         deadlineinput.value=this_task.dueDate;
         
         //Submit button
@@ -203,3 +207,5 @@ let edittaskmodule=(()=> {
     // ----
     return {displayedit}    
 })();
+
+export default edittaskmodule;

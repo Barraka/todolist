@@ -1,0 +1,315 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Corben&family=Dosis:wght@600&family=Open+Sans:wght@500&family=Poppins&family=Roboto&display=swap');
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+:root {
+    
+    --titlebg:rgb(133, 24, 24);
+    --titletxt:rgb(231, 208, 208);
+    --titledark:rgb(54, 11, 11);
+    --linksbg:rgb(12,12,12);
+    --mainbg:rgb(12,12,12);
+    --maincolor:rgb(12,12,12);
+    --bordercolor:rgb(12,12,12);
+    --dark:rgb(75, 75, 75);
+    --light:rgb(194, 194, 194);
+    --background:rgb(194, 194, 194);
+    --modalbg:rgb(47, 72, 88);
+    --category:rgb(194, 194, 194);
+    --modalMenuSelected:rgb(21, 33, 41);
+    --textdark: rgb(39, 39, 48);
+}
+li {
+    list-style: none;
+}
+@media only screen and (max-width: 900px) {
+    :root {
+        --idealdimension: min(100vw,100vh);
+        --modalmody: calc(min(100vw,100vh) * 0.9); 
+        --fontsmall: 0.5em;
+        --fontmedium: 0.75em;
+        --fontlarge: 1.25em;
+        --fontVeryLarge: 2em;
+        --svgscale:0.5;
+        --cardgap:2px;
+        --flexbasis:0.5;
+    }
+}
+@media only screen and (min-width: 901px) {
+    :root {
+        --idealdimension:calc(100vw * 0.5);
+        --modalmody: calc(min(100vw,100vh) * 0.9); 
+        --fontsmall: 0.8em;
+        --fontmedium: 1.1em;
+        --fontlarge: 1.3em;
+        --fontVeryLarge: 2em;
+        --svgscale:0.7;
+        --cardgap:1em;
+        --flexbasis:0.5;
+    }
+}
+@media only screen and (max-width: 400px) {
+    :root {
+        --flexbasis:0;
+    }
+}
+body {
+    background-color: var(--dark);
+    font-family: 'Dosis',sans-serif;
+}
+
+.container {
+    margin: 0 auto;
+    min-height: 100vh;
+    max-width: 1000px;
+}
+.app {
+
+}
+/*------ Header ---------- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--titlebg);
+    color:var(--titletxt);
+    font-size: var(--fontVeryLarge);
+    padding: 0.5rem;
+}
+.menuaccess, .adddiv, .cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex:1;
+}
+.rightaccess {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    flex:0.5;
+}
+.adddiv {
+    flex:1;
+    border:2px solid var(--light);
+}
+.adddiv:hover, .cart:hover, .menuaccess:hover {
+    background-color: var(--titledark);
+    fill:var(--light);
+}   
+
+.header svg{
+    transform: scale(0.7);
+    stroke: var(--light);
+    fill: var(--light);
+}
+#shopping {
+    margin: 0 1em;
+}
+
+/* ---------- Links ---------- */
+.links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--light);
+    font-size: var(--fontlarge);
+    text-align: center;
+    position:relative;
+}
+.link{
+    flex:1;
+    cursor: pointer;
+    border:2px solid transparent;
+}
+.link:hover {
+    background-color: var(--titledark);
+    color: var(--light);
+}
+
+/* ---------- Main content ---------- */
+.maincontent {
+    position:relative;
+    background-color: var(--titlebg);
+    padding-top: 2rem;
+    height: fit-content;
+    min-height: 90vh;
+    overflow: hidden;
+    font-size: var(--fontmedium);
+    width:100%;
+}
+.task_category {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0px 10px;    
+}
+.categorytxt {
+    color:var(--light);
+    margin:1rem 2rem;
+    border:2px solid var(--light);
+    border-radius:50px;
+    width:25%;
+    text-align: center;
+    font-size: var(--fontlarge);
+    background-color: var(--titledark);
+}
+.list_item {
+    color:var(--dark);
+    padding-left: 4rem;
+}
+.taskcard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-radius: 100px;
+    background-color: rgb(149, 113, 187);
+    box-shadow: 0 5px 16px 4px rgb(78, 1, 1);
+    width:100%;
+    gap:var(--cardgap);
+    text-align: center;
+    transition:all 0.4s ease;    
+}
+.taskcard svg {
+    transform: scale(var(--svgscale));
+}
+.tasktitle {
+    flex:1;
+    font-size: var(--fontlarge);
+    min-width: 50px;
+    text-decoration: underline;
+}
+.tasktitle {
+    text-align: left;
+    padding-left: 1rem;
+}
+.taskcard:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 16px 4px rgb(177, 44, 44);
+}
+ul .prio0 {
+    border:3px solid transparent;
+}
+ul .prio1 {
+    border:3px solid rgb(72, 75, 252);
+}
+ul .prio2 {
+    border:3px solid rgb(243, 109, 46);
+}
+ul .prio3 {
+    border:3px solid red;
+}
+.taskcard svg:hover {
+    cursor: pointer;
+    stroke:cyan;
+    fill:cyan;
+}
+.squeeze {
+    transform:scale(0);
+}
+.validate {
+    transform:translateX(120%);
+}
+.deadline, .project, .taskdescription {
+    flex-basis: var(--flexbasis);
+    overflow:hidden;
+}
+.deadline, .taskdescription {
+    
+    color: var(--textdark);
+}
+.deadline {
+    margin-left: 5px;
+}
+.taskdescription {
+    color:var(--dark);
+}
+.edit, .trash {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* ------- Projects ------- */
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-direction: column;
+    width:100%;
+    gap:15px;
+    padding-bottom:10px;
+}
+.categoryOuter {
+    border:2px solid var(--light);
+    border-radius: 20px;
+    padding: 10px 0;
+    position:relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin:10px;
+}
+.projectTitle {
+    flex:1;
+}
+.projectAddOuter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    
+}
+.projectAddOuter svg {
+    transform: scale(var(--svgscale));
+    cursor: pointer;
+}
+.projectAddOuter svg:hover {
+    fill:cyan;
+    stroke:cyan;
+}
+.partOfaProject {
+    list-style:square;
+    margin-left:50px;
+    color:var(--light);
+    font-size: var(--fontlarge);
+}
+.errorDiv {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;    
+    bottom:0;
+    background-color: var(--modalbg);
+    border-radius: 100vw;
+    text-align: center;
+    padding:10px;
+    fill:var(--light);
+    stroke:var(--light);
+}
+/* ----- Lists ----- */
+.categorytxt {
+    padding:5px 20px;
+    width:fit-content;
+}
+.textArea {
+    background-color: var(--light);
+    width:50%;
+    margin:0 auto;
+    color:black;
+    resize:vertical;
+    font-size: var(--fontlarge);
+    padding: 0.5em 0;
+    height:fit-content;
+}

@@ -1,0 +1,308 @@
+.taskcontainer {    
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;    
+    transition: all 0.3s ease-in-out;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+}
+.taskcontainerhidden {
+    transform: scale(0) translateY(-100%);
+}
+
+.taskcontainerinner {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;    
+    text-align: center;
+    color:var(--light);
+    position:relative;    
+    max-width: 700px;
+    width:90%;
+    font-size: var(--fontlarge);
+}
+.addoptions {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: stretch;
+    font-size: var(--font-large);
+    width:100%;
+    cursor: pointer;
+    background-color: var(--modalbg);
+    border:2px solid var(--light);
+    color:var(--light);
+    border-radius: 10px;
+}
+.newitem {
+    width:100%;
+    padding:0.5rem;
+    border-radius: 10px;
+    min-height:100%;
+    flex:1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalbody {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 10px;
+    border: 2px solid var(--light);
+    border-radius: 10px;
+    position:relative;
+    box-shadow: 0 5px 16px 4px rgb(78, 1, 1);
+    max-width: 700px;
+    width:100%;
+    background-color: var(--modalbg);
+    user-select: none;
+    font-size: var(--fontlarge);
+}
+.cancel {
+    position:absolute;
+    top:0;
+    right:0;
+    stroke:rgb(168, 124, 124);
+    fill:rgb(168, 124, 124);
+    margin:5px;
+    cursor: pointer;
+}
+.cancel:hover {
+    stroke:red;
+    fill:red;
+}
+
+/* -------- form elements -------- */
+input, textarea {
+    text-align: center;
+    width:100%;
+    border-radius: 10px;
+    resize: none;
+    border:none;
+    background-color: transparent;
+    cursor: pointer;
+    color:var(--light);
+}
+input {
+    font-size: var(--fontmedium);
+}
+textarea {
+    font-size: var(--fontmedium);
+}
+input:focus, textarea:focus {
+    outline:none;
+    border:none;
+}
+.formouter {    
+    display: inherit;
+    background-color: var(--modalbg);    
+    padding:0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.priorityinput {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height:50px;
+    gap:15px;
+    cursor: pointer;
+}
+.prioOuter {
+    position:relative;
+}
+.prioLabelOuter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.priohint {
+    height:1em;
+    font-size: var(--fontsmall);
+    color: var(--titledark);
+}
+.prioitem {
+    border-radius: 50%;
+    width:2rem;
+    height: 2rem;
+    transition: transform 0.3s ease;
+}
+.prioitem:hover {
+    transform: scale(1.5);
+}
+.modalbody .prio1 {
+    background-color: rgb(72, 75, 252);
+    transition: all 0.2s ease-in;
+}
+.modalbody .prio2 {
+    background-color: rgb(243, 109, 46);
+    transition: all 0.2s ease-in;
+}
+.modalbody .prio3 {
+    background-color: red;
+    transition: all 0.2s ease-in;
+}
+.prioselect {
+    border:3px solid cyan;
+}
+.joinproject {
+    position: relative;
+}
+.joinproject .projectDiv {
+    position: absolute;
+    top:0;
+    z-index: 2;
+    height: 100%;
+    background-color: var(--modalbg);
+    border-radius: 10px;
+    color:black;
+}
+.projectDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.projectDiv input {
+    outline:2px solid var(--modalbg);
+    margin:5px;
+    padding:5px;
+    max-width: 90%;
+    background-color: white;
+    font-size: var(--fontsmall);
+    color:black;
+}
+
+.projectDiv svg {
+    transform: scale(0.7);
+    cursor: pointer;
+}
+.projectDiv svg:hover {
+    stroke:green;
+    fill:green;
+}
+.submit {
+    width:fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.submit svg{
+    stroke:var(--light);
+    fill:var(--light);    
+}
+.submit:hover path{
+    fill: green;
+    stroke: green;
+}
+input[type='date'] {
+    width:auto;
+    border: 2px solid var(--light);
+    font-size: var(--fontmedium);
+}
+.joinproject {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border:2px solid var(--light);
+    border-radius:10px;
+    padding:5px;
+}
+.projectddl {
+    font-family: 'Poppins', sans-serif;
+    font-size: var(--fontsmall);
+    padding: 5px;
+    margin:5px;
+    border-radius: 5px;
+    min-width: 60px;
+    color:var(--titledark);
+}
+
+.createProject {
+    fill:var(--light);
+    stroke:var(--light);
+    transform: scale(0.5);
+    cursor: pointer;
+}
+.createProject:hover {
+    fill:green;
+    stroke:green;
+}
+/* -------- Add project -------- */
+.menuSelected {
+    background-color: var(--modalMenuSelected);
+    color:var(--light);
+}
+.newitem:hover:not(.menuSelected) {
+    background-color: rgb(36, 194, 206);
+    color:var(--titledark);
+}
+.menuSelected:hover {
+    
+} 
+.projectlabel, .listlabel {
+    margin: 20px;
+}
+.projectinput, .listinput {
+    flex:0.5;
+}
+.projecthint, .listhint {
+    margin: 20px;
+}
+
+/* -------- Edit task -------- */
+.modalouter {
+    position:absolute;
+    top: 0;
+    left:0;
+    right:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+    font-size:var(--fontlarge);
+}
+.existingProjects {
+    color:black;
+}
+.existingProjects div {
+    color:var(--light);
+}
+.projectAddOuter .projectTitle:focus {
+    outline: 3px solid cyan;
+}
+.addAndCancel {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.joinproject {
+    fill:var(--light);
+    stroke:var(--light);
+    color:black;
+}
+.existingLists {
+    color:black;
+}
+.listName {
+    color:var(--light);
+}
+.listlabel, .projectlabel {
+    color:black;
+}

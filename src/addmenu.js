@@ -1,3 +1,6 @@
+import newtaskmodule from './addtask.js';
+import newprojectmodule from './addproject.js';
+import newlistmodule from './addlist.js';
 
 let addmenu=(()=>{    
     function createmenu() {
@@ -32,7 +35,6 @@ let addmenu=(()=>{
         newproject.addEventListener('click',manangeMenuStyles);
         newlist.addEventListener('click',manangeMenuStyles);
         newtask.addEventListener('click',manangeMenuStyles);
-        let linkcontent = document.querySelector('.links');
         let maincontent = document.querySelector('.maincontent');
         maincontent.appendChild(taskcontainer);
         removeMenuStyles();
@@ -64,3 +66,5 @@ let addmenu=(()=>{
     }    
     return {createmenu, showmodal,hidemodal};
 })();
+
+export default addmenu;

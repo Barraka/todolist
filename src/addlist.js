@@ -1,5 +1,7 @@
-//----Add list layout
-function newlistmodule() {
+import {listsLogic} from './tasklogic.js';
+import addmenu from './addmenu.js';
+import taskDom from './taskDom.js';
+export default function newlistmodule() {
     let modalbody=document.querySelector('.modalbody');
     modalbody.innerHTML="";
     let cancel = document.createElement('div');
@@ -44,8 +46,8 @@ function newlistmodule() {
     listinput.focus();
 
     function erasefields() {
-        let inputs = modalbody.querySelectorAll('input');
-        for(ele of inputs)ele.value="";
+        // let inputs = modalbody.querySelectorAll('input');
+        // for(ele of inputs)ele.value="";
         modalbody.innerHTML='';
         addmenu.hidemodal();        
     }

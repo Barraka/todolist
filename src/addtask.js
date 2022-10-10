@@ -1,5 +1,8 @@
+import apiGenerator from './editProjectAPI.js';
+import tasklogic from './tasklogic.js';
+import addmenu from './addmenu.js';
+import taskDom from './taskDom.js';
 
-//----Add task layout
 let newtaskmodule=(()=> {
     let priochosen='';
     let prioritylabel2;
@@ -40,7 +43,7 @@ let newtaskmodule=(()=> {
         descriptionlabel.for="desc";
         descriptioninput.id="desc";
         descriptioninput.placeholder="A brief description...";
-        descriptioninput.type="text";
+        // descriptioninput.type="text";
         descriptioninput.rows=2;
         
         //Priority section:
@@ -118,44 +121,6 @@ let newtaskmodule=(()=> {
         prio3.addEventListener('mouseout',priohintOut);
         titleinput.focus();
     }
-    function showAddProject() {
-        let joinproject = document.querySelector('.joinproject');
-        let projectDiv = document.createElement('div');
-        projectDiv.classList.add('projectDiv');
-        let projectDivName = document.createElement('div');
-        projectDivName.classList.add('projectDivName');
-        let projectDivInput = document.createElement('input');
-        projectDivInput.classList.add('projectDivInput');
-        let projectDivSvg = document.createElement('div');
-        projectDivSvg.classList.add('projectDivSvg');
-        projectDivSvg.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M22.5 38V25.5H10v-3h12.5V10h3v12.5H38v3H25.5V38Z"/></svg>';
-        projectDivName.textContent='New project:';
-        projectDiv.appendChild(projectDivName);
-        projectDiv.appendChild(projectDivInput);
-        projectDiv.appendChild(projectDivSvg);
-        joinproject.appendChild(projectDiv);
-        projectDiv.classList.add('projectDivAdd');
-        projectDivSvg.addEventListener('click',taskAppendProject);
-    }
-    function taskAppendProject() {
-        let joinproject = document.querySelector('.joinproject');
-        let projectDiv = document.querySelector('.projectDiv');
-        let newProjectName=document.querySelector('.projectDivInput').value;
-        projects.addProject(newProjectName);
-        projectDiv.remove();
-        let ddlist=projects.getProject();
-        let projectddl;
-        if(ddlist.length) {
-            projectddl=document.querySelector('select');
-            if(projectddl===null)projectddl = document.createElement('select');
-            let optiondiv = document.createElement('option');
-            optiondiv.classList.add('optiondiv');
-            optiondiv.setAttribute('value',`${newProjectName}`);
-            optiondiv.textContent=newProjectName;
-            projectddl.appendChild(optiondiv);
-            joinproject.appendChild(projectddl);
-        }
-    }
     
     function appendtask() {
         if(titleinput.value==="") {
@@ -204,3 +169,5 @@ let newtaskmodule=(()=> {
     // ----
     return {displaytask}    
 })();
+
+export default newtaskmodule;

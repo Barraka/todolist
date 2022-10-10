@@ -1,6 +1,8 @@
+import {projects} from './tasklogic';
+import addmenu from './addmenu.js';
+import taskDom from './taskDom.js';
 
-//----Add project layout
-function newprojectmodule() {
+export default function newprojectmodule() {
     let modalbody=document.querySelector('.modalbody');
     modalbody.innerHTML="";
     let cancel = document.createElement('div');
@@ -14,7 +16,7 @@ function newprojectmodule() {
     projectinput.placeholder="Your amazing new project";
     projectinput.rows=2;
     projectinput.required=true;
-    projectinput.type="text";
+    // projectinput.type="text";
     projectlabel.textContent="What do you want to plan?"
     projectinput.setCustomValidity('Enter your new project');    
     let existingProjects = document.createElement('div');

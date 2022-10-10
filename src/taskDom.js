@@ -1,4 +1,9 @@
-taskDom= (function() {
+import {listsLogic} from './tasklogic.js';
+import {projects} from './tasklogic.js';
+import tasklogic from './tasklogic.js';
+import edittaskmodule from './edittask.js';
+
+let taskDom= (function() {
     let maincontent = document.querySelector('.maincontent');
     function showLists() {
         maincontent.innerHTML='';
@@ -341,3 +346,5 @@ taskDom= (function() {
     //----
     return {showCategories, showProjects, showLists};
 })();
+
+export default taskDom;

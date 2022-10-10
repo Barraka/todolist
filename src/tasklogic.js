@@ -1,4 +1,4 @@
-tasklogic = (function() {
+let tasklogic = (function() {
     let id=0;
     let overdue=[];
     let today=[];
@@ -245,3 +245,5 @@ let listsLogic=(function(){
     //----
     return {createList,addToList,deleteList,deleteListItem,renameList,renameListItem,getfullList,getListByID,updatelist};
 })();
+
+export {projects, listsLogic, tasklogic as default};

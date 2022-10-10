@@ -280,10 +280,13 @@ input[type='date'] {
 }
 .existingProjects {
     color:black;
+    margin-bottom: 10px;
 }
-.existingProjects div {
+.projectItem  {
     color:var(--light);
+    margin: 10px 0px;
 }
+
 .projectAddOuter .projectTitle:focus {
     outline: 3px solid cyan;
 }
@@ -299,9 +302,11 @@ align-items: center;
 }
 .existingLists {
     color:black;
+    margin: 40px 0px;
 }
 .listName {
     color:var(--light);
+    margin: 10px 0px;
 }
 .listlabel, .projectlabel {
     color:black;
