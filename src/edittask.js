@@ -186,7 +186,7 @@ let edittaskmodule=(()=> {
         }
         else {
             priochosen=parseInt(e.target.getAttribute('data-prio'));
-            for(x of priorityinput.children){
+            for(let x of priorityinput.children){
                 x.classList.remove('prioselect');
                 x.style.border='';
             }

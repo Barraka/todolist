@@ -52,11 +52,21 @@ let tasklogic = (function() {
             this.trash=[];
             if(existingData){
                 let retrievedData=JSON.parse(existingData);
+                console.log(retrievedData);
                 for(let i=retrievedData.length-1;i>=0;i--) {
                     let thisTask=new Task(retrievedData[i].title,retrievedData[i].description,retrievedData[i].dueDate,retrievedData[i].priority,retrievedData[i].project,retrievedData[i].id)
                     this.tasks.push(thisTask);
                 }
+            } else {
+                let nowDate=new Date();
+                let task1=new Task('Do This','',nowDate,'2','1',1);
+                let task2=new Task('Do That','','','','',2);
+                let task3=new Task('Get some sleep','','','','',3);
+                this.tasks.push(task1);
+                this.tasks.push(task2);
+                this.tasks.push(task3);
             }
+            
         }
         printTasks() {
             console.log(JSON.parse(localStorage.getItem('mytasks')));
@@ -87,14 +97,14 @@ let tasklogic = (function() {
         }
         retrieveTask(id) {
             for(let x=this.tasks.length-1;x>=0;x--) {
-                if(this.tasks[x].id===parseInt(id)){
+                if(parseInt(this.tasks[x].id)===parseInt(id)){
                     return this.tasks[x];
                 }
             }
         }
         editTask(id,o) {
             for(let x=this.tasks.length-1;x>=0;x--) {
-                if(this.tasks[x].id===parseInt(id)){
+                if(parseInt(this.tasks[x].id)===parseInt(id)){
                     this.tasks[x].title=o.title;
                     this.tasks[x].description=o.description;
                     this.tasks[x].dueDate=o.dueDate;
@@ -149,6 +159,8 @@ let projects=(function(){
         for(let i=projectList.length-1;i>=0;i--) {
             if(projectList[i].id>id)id=projectList[i].id;
         }
+    } else {
+        addProject('Important Project');
     }
     function addProject(s) {
         id++;
