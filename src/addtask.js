@@ -151,7 +151,7 @@ let newtaskmodule=(()=> {
         }
         else {
             priochosen=parseInt(e.target.getAttribute('data-prio'));
-            for(x of priorityinput.children)x.classList.remove('prioselect');
+            for(let x of priorityinput.children)x.classList.remove('prioselect');
             e.target.classList.add('prioselect');
         }
     }        
